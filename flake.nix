@@ -31,6 +31,16 @@
         };
         modules = [
           inputs.nixos-wsl.nixosModules.default
+          {
+            networking.hostName = "wsl-nixos";
+            wsl.enable = true;
+            wsl.defaultUser = "rid9";
+            security.sudo.wheelNeedsPassword = true;
+            programs.nix-ld = {
+              enable = true;
+              package = nixpkgs.legacyPackages."${system}".nix-ld-rs;
+            };
+          }
           ./configuration.nix
           inputs.home-manager.nixosModules.default
         ];

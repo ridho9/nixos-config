@@ -1,31 +1,29 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  networking.hostName = "wsl-nixos";
-  wsl.enable = true;
-  wsl.defaultUser = "rid9";
-
   system.stateVersion = "24.05";
-  security.sudo.wheelNeedsPassword = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   environment.systemPackages = with pkgs; [
-    neovim  
+    neovim
     vim
     wget
     git
   ];
 
-  programs.nix-ld = {
-    enable = true;
-    package = pkgs.nix-ld-rs;
-  };
   programs.fish = {
     enable = true;
   };
-  
 
   users.users.rid9 = {
     isNormalUser = true;
@@ -36,7 +34,9 @@
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users = {
       rid9 = import ./home.nix;
     };

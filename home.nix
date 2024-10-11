@@ -1,4 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   home.username = "rid9";
@@ -24,6 +30,8 @@
 
     pkgs.nixfmt-rfc-style
     pkgs.nil
+    pkgs.eza
+    pkgs.bat
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -84,6 +92,7 @@
     };
     shellAliases = {
       cd = "z";
+      ls = "eza";
     };
   };
 
