@@ -22,11 +22,10 @@
     vim
     wget
     git
+    fish
   ];
 
-  programs.fish = {
-    enable = true;
-  };
+  programs.fish.enable = true;
 
   home-manager = {
     extraSpecialArgs = {
