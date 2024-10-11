@@ -32,6 +32,7 @@
     pkgs.nil
     pkgs.eza
     pkgs.bat
+    pkgs.fastfetch
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
