@@ -33,6 +33,9 @@
     pkgs.eza
     pkgs.bat
     pkgs.fastfetch
+
+    (pkgs.python3.withPackages (ppkgs: with ppkgs; [ ]))
+    pkgs.poetry
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

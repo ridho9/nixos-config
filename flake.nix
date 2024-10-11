@@ -35,6 +35,7 @@
             networking.hostName = "wsl-nixos";
             wsl.enable = true;
             wsl.defaultUser = "rid9";
+            wsl.docker-desktop.enable = true;
             security.sudo.wheelNeedsPassword = true;
             programs.nix-ld = {
               enable = true;
