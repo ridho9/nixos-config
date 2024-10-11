@@ -25,24 +25,12 @@
     in
     {
       nixosConfigurations.wsl-nixos = nixpkgs.lib.nixosSystem {
-        system = system;
+        inherit system;
         specialArgs = {
-          inherit inputs system;
+          inherit inputs;
         };
         modules = [
-          inputs.nixos-wsl.nixosModules.default
-          {
-            networking.hostName = "wsl-nixos";
-            wsl.enable = true;
-            wsl.defaultUser = "rid9";
-            wsl.docker-desktop.enable = true;
-            security.sudo.wheelNeedsPassword = true;
-            programs.nix-ld = {
-              enable = true;
-              package = nixpkgs.legacyPackages."${system}".nix-ld-rs;
-            };
-          }
-          ./configuration.nix
+          ./hosts/wsl-nixos/configuration.nix
           inputs.home-manager.nixosModules.default
         ];
       };
