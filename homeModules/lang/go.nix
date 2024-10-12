@@ -1,9 +1,10 @@
 { pkgs, ... }:
 {
   config = {
-    home.packages =
-      [
-      ];
+    home.packages = [
+      pkgs.go
+      pkgs.gopls
+    ];
 
     programs.go = {
       enable = true;

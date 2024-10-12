@@ -23,9 +23,17 @@
     wget
     git
     fish
+
+    nh
+    nvd
+    nix-output-monitor
   ];
 
   programs.fish.enable = true;
+
+  programs.nh = {
+    enable = true;
+  };
 
   home-manager = {
     extraSpecialArgs = {
