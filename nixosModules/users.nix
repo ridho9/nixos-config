@@ -9,4 +9,5 @@
   };
 
   home-manager.users.rid9 = import ./../homeModules/default.nix;
+  programs.nh.flake = "/home/rid9/nixos-config";
 }

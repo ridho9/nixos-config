@@ -2,7 +2,11 @@
 {
   config = {
     home.packages = [
-      (pkgs.python3.withPackages (ppkgs: with ppkgs; [ ]))
+      (pkgs.python3.withPackages (
+        ppkgs: with ppkgs; [
+          ppkgs.requests
+        ]
+      ))
       pkgs.poetry
     ];
   };

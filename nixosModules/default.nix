@@ -23,6 +23,8 @@
     wget
     git
     fish
+    zip
+    unzip
 
     nh
     nvd
@@ -36,6 +38,7 @@
   };
 
   home-manager = {
+    useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
     };
