@@ -11,6 +11,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs =
@@ -25,7 +27,9 @@
     {
       nixosConfigurations.wsl-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           ./hosts/wsl-nixos/configuration.nix
           inputs.home-manager.nixosModules.default
@@ -33,10 +37,13 @@
       };
 
       nixosConfigurations.legion-nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs system; };
+        specialArgs = {
+          inherit inputs system;
+        };
         modules = [
           ./hosts/legion-nixos/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.nixos-hardware.nixosModules.lenovo-legion-15ach6h
         ];
       };
     };

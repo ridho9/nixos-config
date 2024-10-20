@@ -24,7 +24,10 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [
+    "kvm-amd"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

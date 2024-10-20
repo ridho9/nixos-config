@@ -27,6 +27,9 @@
   networking.hostName = "legion-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -56,7 +59,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -105,6 +109,7 @@
       inherit inputs;
     };
     users.rid9 = import ./home-manager.nix;
+    backupFileExtension = "hm-backup";
   };
 
   # Allow unfree packages
@@ -123,8 +128,9 @@
     nvd
     nix-output-monitor
 
-    wezterm
     alacritty
+
+    egl-wayland
   ];
 
   programs.nh.enable = true;
@@ -168,4 +174,25 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   time.hardwareClockInLocalTime = true;
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  };
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = true;
+    powerManagement.enable = true;
+    open = false;
+  };
+
 }
