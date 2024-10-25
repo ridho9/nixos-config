@@ -195,4 +195,5 @@
     open = false;
   };
 
+  services.blueman.enable = true;
 }

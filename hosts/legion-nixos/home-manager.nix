@@ -8,6 +8,7 @@
     ./homeModules/lang/python3.nix
     ./homeModules/lang/nix.nix
     ./homeModules/lang/go.nix
+    ./homeModules/lang/js.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -29,7 +30,8 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    thunderbird
+    betterbird
+    # thunderbird
     vscode-fhs
     firefox-devedition
     floorp
@@ -51,4 +53,5 @@
       font.normal.family = "FiraCode Nerd Font";
     };
   };
+
 }
