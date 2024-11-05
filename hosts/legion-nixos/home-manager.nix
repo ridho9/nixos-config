@@ -30,11 +30,12 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    betterbird
+    # betterbird
     # thunderbird
     vscode-fhs
     firefox-devedition
     floorp
+    brave
     discord
 
     fastfetch

@@ -27,6 +27,7 @@
   boot.kernelModules = [
     "kvm-amd"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "ic2-dev"
   ];
   boot.extraModulePackages = [ ];
 
@@ -56,4 +57,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  services.udev.extraRules = ''
+    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+  '';
 }

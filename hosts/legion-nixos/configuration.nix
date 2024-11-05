@@ -6,6 +6,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 
@@ -38,7 +39,10 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Asia/Singapore";
+  time.timeZone = lib.mkDefault "Asia/Jakarta";
+  # services.automatic-timezoned.enable = true;
+  # services.geoclue2.enableDemoAgent = lib.mkForce true;
+  # services.geoclue2.geoProviderUrl = "https://beacondb.net/v1/geolocate";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_SG.UTF-8";
@@ -98,6 +102,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "i2c"
     ];
     shell = pkgs.fish;
     hashedPassword = "$6$AzOsDEZH9zFSF0AT$g9pxQMibYSOm390jTMiTzYhxT50yM8AsjDAbCfmqkwKT4VdddZ8xTu.3dC44yOsiCt24dniIBNJDZaKfOIGws1";
@@ -131,6 +136,7 @@
     alacritty
 
     egl-wayland
+    ddcutil
   ];
 
   programs.nh.enable = true;
@@ -140,7 +146,7 @@
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     # fira-code
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
