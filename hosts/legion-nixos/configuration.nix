@@ -15,7 +15,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # ./nextdns.nix
+    ./secrets/nextdns.nix
   ];
 
   nix.settings.experimental-features = [
@@ -219,4 +219,13 @@
 
   virtualisation.docker.enable = true;
 
+  networking.nameservers = [
+    "127.0.0.1"
+    "::1"
+  ];
+
+  services.logind.extraConfig = ''
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=suspend
+  '';
 }

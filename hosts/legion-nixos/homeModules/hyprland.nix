@@ -54,7 +54,8 @@
       [
         "$mod, F, exec, firefox-devedition"
         "$mod, T, exec, alacritty"
-        "$mod, Space, exec, rofi -show drun -show-icons"
+        # "$mod, Space, exec, rofi -show drun -show-icons"
+        "$mod, Space, exec, fuzzel"
         ", Print, exec, grimblast copysave area | xargs notify-send"
 
         "$mod, S, togglespecialworkspace, magic"
@@ -113,4 +114,7 @@
     defaultTimeout = 2000;
   };
 
+  programs.fuzzel = {
+    enable = true;
+  };
 }
