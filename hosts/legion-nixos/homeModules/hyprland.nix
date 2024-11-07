@@ -21,6 +21,7 @@
     "$mod" = "SUPER";
     exec-once = [
       "waybar"
+      "hyprctl setcursor BreezeX-Black 32"
     ];
     env = [
       "LIBVA_DRIVER_NAME,nvidia"

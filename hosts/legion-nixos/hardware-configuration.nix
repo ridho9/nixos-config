@@ -27,7 +27,7 @@
   boot.kernelModules = [
     "kvm-amd"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    "ic2-dev"
+    "i2c-dev"
   ];
   boot.extraModulePackages = [ ];
 
@@ -61,4 +61,6 @@
   services.udev.extraRules = ''
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
+
+  hardware.i2c.enable = true;
 }
