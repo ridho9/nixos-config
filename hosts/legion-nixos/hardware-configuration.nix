@@ -22,6 +22,7 @@
     "uas"
     "usb_storage"
     "sd_mod"
+    "hid_cherry"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [

@@ -22,7 +22,13 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    useOSProber = true;
+    efiSupport = true;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "legion-nixos"; # Define your hostname.
@@ -137,6 +143,7 @@
 
     egl-wayland
     ddcutil
+    os-prober
   ];
 
   programs.nh.enable = true;
