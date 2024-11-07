@@ -14,6 +14,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # ./nextdns.nix
   ];
 
   nix.settings.experimental-features = [
@@ -111,6 +113,8 @@
       "wheel"
       "i2c"
       "video"
+      "input"
+      "docker"
     ];
     shell = pkgs.fish;
     hashedPassword = "$6$AzOsDEZH9zFSF0AT$g9pxQMibYSOm390jTMiTzYhxT50yM8AsjDAbCfmqkwKT4VdddZ8xTu.3dC44yOsiCt24dniIBNJDZaKfOIGws1";
@@ -146,6 +150,7 @@
     egl-wayland
     ddcutil
     os-prober
+    git-crypt
   ];
 
   programs.nh.enable = true;
@@ -211,4 +216,7 @@
   };
 
   services.blueman.enable = true;
+
+  virtualisation.docker.enable = true;
+
 }
