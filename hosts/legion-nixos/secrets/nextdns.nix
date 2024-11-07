@@ -4,7 +4,7 @@
     enable = true;
     arguments = [
       "-config"
-      "changethis"
+      "test"
       "-cache-size"
       "10MB"
     ];
