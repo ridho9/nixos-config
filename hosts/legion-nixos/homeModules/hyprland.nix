@@ -58,6 +58,7 @@
         "$mod, S, togglespecialworkspace, magic"
         "$mod, S, movetoworkspace, special:magic"
         "$mod, S, togglespecialworkspace, magic"
+
       ]
       ++ (
         # workspaces
@@ -79,6 +80,10 @@
           "$mod SHIFT, code:19, movetoworkspace, 10"
         ]
       );
+    bindl = [
+      ", XF86MonBrightnessUp, exec, xbacklight +5"
+      '', XF86MonBrightnessDown, execr, [ "$(xbacklight -get)" -gt 5 ] && xbacklight -5''
+    ];
     input = {
       touchpad = {
         scroll_factor = 0.2;
