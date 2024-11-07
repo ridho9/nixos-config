@@ -83,6 +83,11 @@
     bindl = [
       ", XF86MonBrightnessUp, exec, xbacklight +5"
       '', XF86MonBrightnessDown, execr, [ "$(xbacklight -get)" -gt 5 ] && xbacklight -5''
+      ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    ];
+    bindel = [
+      ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     ];
     input = {
       touchpad = {
@@ -90,6 +95,8 @@
       };
     };
   };
+
+  # programs.hyprlock.enable = true;
 
   programs.waybar = {
     enable = true;
@@ -132,8 +139,8 @@
         pulseaudio = {
           format = "{volume}% {icon} {format_source}";
           format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-muted = " {format_source}";
           format-source = "{volume}% ";
           format-source-muted = "";
           format-icons = {
@@ -208,4 +215,5 @@
     enable = true;
     defaultTimeout = 2000;
   };
+
 }
