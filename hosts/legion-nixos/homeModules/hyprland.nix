@@ -6,7 +6,7 @@
 
   home.packages = with pkgs; [
     libnotify
-    rofi-wayland
+    # rofi-wayland
     grim
     slurp
 
@@ -14,6 +14,13 @@
     hyprshot
     grimblast
     pavucontrol
+    hypridle
+    hyprpaper
+
+    pipewire
+    wireplumber
+    xdg-desktop-portal-hyprland
+
   ];
 
   home.sessionVariables = {
@@ -24,8 +31,14 @@
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     exec-once = [
+      "hypridle"
+      "hyprpaper"
       "waybar"
       "hyprctl setcursor BreezeX-Black 32"
+      "blueman-applet"
+      "[workspace 1 silent] firefox-devedition"
+      "[workspace 2 silent] alacritty"
+      "[workspace 10 silent] discord --start-minimized"
     ];
     env = [
       "LIBVA_DRIVER_NAME,nvidia"
@@ -101,11 +114,9 @@
     };
   };
 
-  # programs.hyprlock.enable = true;
-
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
     config.common.default = "*";
   };
 
@@ -116,5 +127,75 @@
 
   programs.fuzzel = {
     enable = true;
+  };
+
+  programs.swaylock = {
+    enable = true;
+    package = pkgs.swaylock-effects;
+    settings = {
+      indicator = true;
+      clock = true;
+
+      color = "1e1e2e";
+      bs-hl-color = "f5e0dc";
+      caps-lock-bs-hl-color = "f5e0dc";
+      caps-lock-key-hl-color = "a6e3a1";
+      inside-color = "00000000";
+      inside-clear-color = "00000000";
+      inside-caps-lock-color = "00000000";
+      inside-ver-color = "00000000";
+      inside-wrong-color = "00000000";
+      key-hl-color = "a6e3a1";
+      layout-bg-color = "00000000";
+      layout-border-color = "00000000";
+      layout-text-color = "cdd6f4";
+      line-color = "00000000";
+      line-clear-color = "00000000";
+      line-caps-lock-color = "00000000";
+      line-ver-color = "00000000";
+      line-wrong-color = "00000000";
+      ring-color = "b4befe";
+      ring-clear-color = "f5e0dc";
+      ring-caps-lock-color = "fab387";
+      ring-ver-color = "89b4fa";
+      ring-wrong-color = "eba0ac";
+      separator-color = "00000000";
+      text-color = "cdd6f4";
+      text-clear-color = "f5e0dc";
+      text-caps-lock-color = "fab387";
+      text-ver-color = "89b4fa";
+      text-wrong-color = "eba0ac";
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        # lock_cmd = ''notify-send "lock!"''; # dbus/sysd lock command (loginctl lock-session)
+
+        lock_cmd = ''pidof swaylock || swaylock'';
+        # unlock_cmd = ''notify-send "unlock!"''; # same as above, but unlock
+        before_sleep_cmd = ''pidof swaylock || swaylock''; # command ran before sleep
+        # after_sleep_cmd = ''notify-send "Awake!"''; # command ran after sleep
+
+        ignore_dbus_inhibit = false; # whether to ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
+        ignore_systemd_inhibit = false; # whether to ignore systemd-inhibit --what=idle inhibitors
+      };
+
+      # listener = {
+      #   timeout = 500; # in seconds
+      #   on-timeout = ''notify-send "You are idle!"''; # command to run when timeout has passed
+      #   on-resume = ''notify-send "Welcome back!"''; # command to run when activity is detected after timeout has fired.
+      # };
+    };
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "~/Pictures/wallpaper/5.png" ];
+      wallpaper = [ ",~/Pictures/wallpaper/5.png" ];
+    };
   };
 }

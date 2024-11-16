@@ -15,7 +15,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ./secrets/nextdns.nix
+    # ./secrets/nextdns.nix
   ];
 
   nix.settings.experimental-features = [
@@ -74,7 +74,7 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.displayManager.sddm.enable = true;
   services.displayManager.ly.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -151,6 +151,11 @@
     ddcutil
     os-prober
     git-crypt
+
+    gtk3
+    gtk4
+
+    swayimg
   ];
 
   programs.nh.enable = true;
@@ -213,19 +218,31 @@
     nvidiaSettings = true;
     powerManagement.enable = true;
     open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   services.blueman.enable = true;
 
   virtualisation.docker.enable = true;
 
-  networking.nameservers = [
-    "127.0.0.1"
-    "::1"
-  ];
-
   services.logind.extraConfig = ''
     # don’t shutdown when power button is short-pressed
     HandlePowerKey=suspend
   '';
+
+  security.pam.services.swaylock = { };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  services.flatpak.enable = true;
+
+  programs.thunar.enable = true;
+  xdg.mime.defaultApplications."inode/directory" = "thunar.desktop";
+  services.tumbler.enable = true;
+  services.gvfs.enable = true;
 }
