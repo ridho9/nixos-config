@@ -241,7 +241,13 @@
 
   services.flatpak.enable = true;
 
-  programs.thunar.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
   xdg.mime.defaultApplications."inode/directory" = "thunar.desktop";
   services.tumbler.enable = true;
   services.gvfs.enable = true;
