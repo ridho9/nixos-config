@@ -13,4 +13,11 @@
   };
 
   stylix.targets.fish.enable = false;
+  stylix.targets.grub.enable = false;
+
+  home-manager.users.rid9 = {
+    stylix.targets.fish.enable = false;
+    stylix.targets.waybar.enable = false;
+    stylix.targets.alacritty.enable = false;
+  };
 }

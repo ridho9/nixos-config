@@ -31,6 +31,7 @@
     device = "nodev";
     useOSProber = true;
     efiSupport = true;
+    catppuccin.enable = true;
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -126,7 +127,13 @@
     extraSpecialArgs = {
       inherit inputs;
     };
-    users.rid9 = import ./home-manager.nix;
+    users.rid9 = {
+      imports = [
+        ./home-manager.nix
+        inputs.catppuccin.homeManagerModules.catppuccin
+      ];
+    };
+
     backupFileExtension = "hm-backup";
   };
 
@@ -252,4 +259,6 @@
   xdg.mime.defaultApplications."inode/directory" = "thunar.desktop";
   services.tumbler.enable = true;
   services.gvfs.enable = true;
+
+  catppuccin.flavor = "mocha";
 }

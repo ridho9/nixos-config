@@ -29,6 +29,7 @@ in
         cd = "z";
         ls = "eza";
       };
+      catppuccin.enable = true;
     };
 
     programs.direnv = {
@@ -44,7 +45,6 @@ in
     };
     xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
 
-    xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
-    stylix.targets.fish.enable = false;
+    # xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
   };
 }

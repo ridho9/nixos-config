@@ -14,6 +14,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -46,6 +47,7 @@
           inputs.home-manager.nixosModules.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-15ach6h
           inputs.stylix.nixosModules.stylix
+          inputs.catppuccin.nixosModules.catppuccin
         ];
       };
     };

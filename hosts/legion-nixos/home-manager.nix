@@ -52,24 +52,23 @@
     settings = {
       font.normal.family = "FiraCode Nerd Font";
     };
+    catppuccin.enable = true;
   };
 
-  # gtk = {
-  #   enable = true;
-  #   iconTheme = {
-  #     package = pkgs.papirus-icon-theme;
-  #     name = "Papirus-Dark";
-  #   };
-  #   gtk3.extraConfig = {
-  #     gtk-application-prefer-dark-theme = 1;
-  #   };
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
 
-  #   gtk4.extraConfig = {
-  #     gtk-application-prefer-dark-theme = 1;
-  #   };
-  # };
-
-  stylix.targets.waybar.enable = false;
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
 
   programs.wezterm = {
     enable = true;
