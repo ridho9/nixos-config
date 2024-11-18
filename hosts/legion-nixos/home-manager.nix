@@ -34,7 +34,6 @@
     # thunderbird
     vscode-fhs
     firefox-devedition
-    floorp
     brave
     discord
 
@@ -69,4 +68,10 @@
   #     gtk-application-prefer-dark-theme = 1;
   #   };
   # };
+
+  stylix.targets.waybar.enable = false;
+
+  programs.wezterm = {
+    enable = true;
+  };
 }

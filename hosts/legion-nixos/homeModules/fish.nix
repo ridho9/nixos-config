@@ -1,4 +1,12 @@
 { pkgs, ... }:
+let
+  catppuccin-fish = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "fish";
+    rev = "cc8e4d8fffbdaab07b3979131030b234596f18da";
+    sha256 = "udiU2TOh0lYL7K7ylbt+BGlSDgCjMpy75vQ98C1kFcc=";
+  };
+in
 {
   config = {
     home.packages = [
@@ -35,5 +43,8 @@
       enable = true;
     };
     xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
+
+    xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
+    stylix.targets.fish.enable = false;
   };
 }
