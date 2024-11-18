@@ -16,6 +16,7 @@
     ./hardware-configuration.nix
 
     # ./secrets/nextdns.nix
+    ./stylix.nix
   ];
 
   nix.settings.experimental-features = [
