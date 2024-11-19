@@ -10,6 +10,9 @@
       package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       name = "FiraCode Nerd Font";
     };
+    # serif = config.stylix.fonts.monospace;
+    # sansSerif = config.stylix.fonts.monospace;
+    sizes.applications = 10;
   };
 
   stylix.targets.fish.enable = false;
