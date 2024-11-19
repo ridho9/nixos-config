@@ -65,6 +65,7 @@
     };
     bind =
       [
+        "$mod SHIFT, Q, killactive"
         "$mod, F, exec, firefox-devedition"
         "$mod, T, exec, alacritty"
         # "$mod, Space, exec, rofi -show drun -show-icons"
