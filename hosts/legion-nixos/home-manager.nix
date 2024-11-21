@@ -44,6 +44,8 @@
 
     fastfetch
     gh
+
+    wayland-scanner
   ];
 
   programs.git = {
