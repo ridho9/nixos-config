@@ -164,6 +164,9 @@
     gtk4
 
     swayimg
+
+    btop
+    bruno
   ];
 
   programs.nh.enable = true;
@@ -261,4 +264,10 @@
   services.gvfs.enable = true;
 
   catppuccin.flavor = "mocha";
+
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+    trusted-users = root rid9
+  '';
 }

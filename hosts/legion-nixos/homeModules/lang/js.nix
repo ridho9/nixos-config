@@ -1,8 +1,11 @@
 { pkgs, ... }:
 {
   config = {
-    home.packages = [
-      pkgs.bun
+    home.packages = with pkgs; [
+      nodejs
+      yarn
     ];
+
+    programs.bun.enable = true;
   };
 }

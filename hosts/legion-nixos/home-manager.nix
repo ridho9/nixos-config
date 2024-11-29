@@ -46,6 +46,19 @@
     gh
 
     wayland-scanner
+
+    obs-studio
+    obs-studio-plugins.wlrobs
+
+    mpv
+
+    httpie
+
+    slack
+    devenv
+
+    postgresql
+    valkey
   ];
 
   programs.git = {

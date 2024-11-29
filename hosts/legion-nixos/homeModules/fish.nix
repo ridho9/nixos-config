@@ -18,12 +18,13 @@ in
       enable = true;
       interactiveShellInit = ''
         set fish_greeting # Disable greeting
+        fish_add_path "/home/rid9/.bun/bin"
       '';
       shellAbbrs = {
         gst = "git status";
         gc = "git commit";
         ga = "git add";
-        gco = "git add";
+        gco = "git checkout";
       };
       shellAliases = {
         cd = "z";
