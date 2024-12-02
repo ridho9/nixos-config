@@ -179,7 +179,8 @@
     noto-fonts-cjk-sans
     noto-fonts-emoji
     # fira-code
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    # (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -219,7 +220,7 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
+    # NIXOS_OZONE_WL = "1";
   };
 
   hardware.graphics.enable = true;
