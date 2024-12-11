@@ -52,8 +52,8 @@
     windowrulev2 = [
       "float,class:(pavucontrol)"
       "float,class:(.blueman-manager-wrapped)"
-      "size 400 300,class:(.blueman-manager-wrapped)"
-      "move 100%-w-0 30,class:(.blueman-manager-wrapped)"
+      # "size 400 300,class:(.blueman-manager-wrapped)"
+      # "move  30,class:(.blueman-manager-wrapped)"
     ];
 
     general = {

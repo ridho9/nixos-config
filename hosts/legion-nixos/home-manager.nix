@@ -59,6 +59,9 @@
 
     postgresql
     valkey
+
+    cbqn
+    uiua
   ];
 
   programs.git = {

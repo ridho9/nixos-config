@@ -271,4 +271,6 @@
     keep-derivations = true
     trusted-users = root rid9
   '';
+
+  hardware.xpadneo.enable = true;
 }

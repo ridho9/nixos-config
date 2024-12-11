@@ -62,6 +62,10 @@
   services.udev.extraRules = ''
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
+  services.udev.packages = with pkgs; [
+    game-devices-udev-rules
+  ];
+  hardware.uinput.enable = true;
 
   hardware.i2c.enable = true;
 
