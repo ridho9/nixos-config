@@ -9,6 +9,9 @@
 
     programs.go = {
       enable = true;
+      goBin = ".local/bin.go";
     };
+
+    home.sessionPath = [ "$HOME/.local/bin.go" ];
   };
 }

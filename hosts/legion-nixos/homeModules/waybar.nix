@@ -23,10 +23,16 @@
           "pulseaudio"
           "network"
           "backlight"
+          "temperature"
           "battery"
           "tray"
           # "clock"
         ];
+
+        temperature = {
+          hwmon-path = "/sys/class/hwmon/hwmon3/temp1_input";
+          format = "{temperatureC}°C";
+        };
 
         clock = {
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
