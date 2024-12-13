@@ -15,7 +15,6 @@
           "hyprland/submap"
         ];
         modules-center = [
-          # "hyprland/window"
           "clock"
         ];
         modules-right = [
@@ -26,7 +25,6 @@
           "temperature"
           "battery"
           "tray"
-          # "clock"
         ];
 
         temperature = {
