@@ -20,6 +20,7 @@
     pipewire
     wireplumber
     xdg-desktop-portal-hyprland
+    hyprpolkitagent
 
   ];
 
@@ -29,16 +30,21 @@
 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   wayland.windowManager.hyprland.settings = {
+    debug = {
+      disable_logs = false;
+    };
+
     "$mod" = "SUPER";
     exec-once = [
       "hypridle"
       "hyprpaper"
       "waybar"
       # "hyprctl setcursor BreezeX-Black 32"
-      "blueman-applet"
+      "blueman-applet && blueman-tray"
       "[workspace 1 silent] firefox-devedition"
       "[workspace 2 silent] alacritty"
       "[workspace 10 silent] discord --start-minimized"
+      "systemctl --user start hyprpolkitagent"
     ];
     env = [
       "LIBVA_DRIVER_NAME,nvidia"

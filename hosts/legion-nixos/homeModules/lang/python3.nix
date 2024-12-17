@@ -8,7 +8,7 @@
         ]
       ))
       pkgs.poetry
-      pkgs.uv
+      # pkgs.uv
     ];
   };
 }

@@ -96,4 +96,5 @@
   programs.wezterm = {
     enable = true;
   };
+
 }
