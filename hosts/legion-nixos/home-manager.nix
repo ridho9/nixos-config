@@ -62,6 +62,9 @@
 
     cbqn
     uiua
+    hyperfine
+    caddy
+    google-cloud-sdk
   ];
 
   programs.git = {
