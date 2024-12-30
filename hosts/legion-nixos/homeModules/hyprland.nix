@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./waybar.nix
@@ -22,6 +27,7 @@
     xdg-desktop-portal-hyprland
     hyprpolkitagent
 
+    inputs.hyprland-qtutils.packages."${pkgs.system}".default
   ];
 
   home.sessionVariables = {
@@ -123,7 +129,10 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
     config.common.default = "*";
   };
 

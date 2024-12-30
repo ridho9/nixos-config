@@ -168,6 +168,12 @@
 
     btop
     bruno
+    sqlite
+    sqlite-web
+
+    protobuf
+    lm_sensors
+    i2c-tools
   ];
 
   programs.nh.enable = true;

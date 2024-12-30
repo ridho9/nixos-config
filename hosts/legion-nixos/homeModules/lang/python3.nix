@@ -2,13 +2,13 @@
 {
   config = {
     home.packages = [
-      (pkgs.python3.withPackages (
+      (pkgs.python313.withPackages (
         ppkgs: with ppkgs; [
-          ppkgs.requests
+          requests
         ]
       ))
       pkgs.poetry
-      # pkgs.uv
+      pkgs.uv
     ];
   };
 }

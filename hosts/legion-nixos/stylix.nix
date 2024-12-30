@@ -23,4 +23,10 @@
     stylix.targets.waybar.enable = false;
     stylix.targets.alacritty.enable = false;
   };
+
+  # catppuccin = {
+  #   grub.enable = true;
+  #   fish.enable = true;
+  #   alacritty.enable = true;
+  # };
 }

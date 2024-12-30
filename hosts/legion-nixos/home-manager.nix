@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  input,
   ...
 }:
 
@@ -65,6 +66,8 @@
     hyperfine
     caddy
     google-cloud-sdk
+    postman
+    grpcui
   ];
 
   programs.git = {

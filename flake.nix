@@ -15,6 +15,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     catppuccin.url = "github:catppuccin/nix";
+    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
   };
 
   outputs =
