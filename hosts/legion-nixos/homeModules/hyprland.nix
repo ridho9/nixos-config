@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./waybar.nix
+    ./waybar/waybar.nix
   ];
 
   home.packages = with pkgs; [

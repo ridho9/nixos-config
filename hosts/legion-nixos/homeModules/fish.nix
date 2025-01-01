@@ -46,7 +46,5 @@ in
       enable = true;
     };
     xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
-
-    # xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
   };
 }

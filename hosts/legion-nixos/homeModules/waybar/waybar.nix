@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  xdg.configFile."waybar/mocha.css".source = ./mocha.css;
+  xdg.configFile."waybar/style.css".source = ./waybar.css;
   programs.waybar = {
     enable = true;
     # catppuccin.enable = true;
@@ -27,8 +29,22 @@
           "tray"
         ];
 
+        "hyprland/workspaces" = {
+          format = "{icon} {windows} ";
+          window-rewrite-default = "?";
+          window-rewrite = {
+            "class<firefox>" = "";
+            "class<discord>" = "";
+            "class<Code>" = "";
+            "class<Alacritty>" = "";
+            "class<Slack>" = "";
+            "class<steam>" = "";
+          };
+        };
+
         temperature = {
-          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+          hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
+          input-filename = "temp1_input";
           format = "{temperatureC}°C";
         };
 
@@ -52,23 +68,23 @@
           format-source = "{volume}% ";
           format-source-muted = "";
           format-icons = {
-            headphone = " ";
-            hands-free = "󱡏 ";
-            headset = "󰋎 ";
-            phone = " ";
-            portable = " ";
-            car = " ";
+            headphone = "";
+            hands-free = "󱡏";
+            headset = "󰋎";
+            phone = "";
+            portable = "";
+            car = "";
             default = [
-              " "
-              " "
-              " "
+              ""
+              ""
+              ""
             ];
           };
           on-click = "pavucontrol";
         };
 
         network = {
-          format-wifi = "{essid} ({signalStrength}%) ";
+          format-wifi = "{essid} ({signalStrength}%)  ";
           format-ethernet = "{ipaddr}/{cidr} ";
           tooltip-format = "{ifname} via {gwaddr} ";
           format-linked = "{ifname} (No IP) ";
@@ -122,5 +138,4 @@
       }
     ];
   };
-
 }
