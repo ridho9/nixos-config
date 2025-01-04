@@ -39,6 +39,7 @@
             "class<Alacritty>" = "";
             "class<Slack>" = "";
             "class<steam>" = "";
+            "class<Godot>" = "";
           };
         };
 

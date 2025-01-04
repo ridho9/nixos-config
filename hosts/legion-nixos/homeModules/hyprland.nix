@@ -46,7 +46,7 @@
       "hyprpaper"
       "waybar"
       # "hyprctl setcursor BreezeX-Black 32"
-      "blueman-applet && blueman-tray"
+      # "blueman-applet && blueman-tray"
       "[workspace 1 silent] firefox-devedition"
       "[workspace 2 silent] alacritty"
       "[workspace 10 silent] discord --start-minimized"
@@ -64,6 +64,7 @@
     windowrulev2 = [
       "float,class:(pavucontrol)"
       "float,class:(.blueman-manager-wrapped)"
+      "tile,class:(Godot)"
       # "size 400 300,class:(.blueman-manager-wrapped)"
       # "move  30,class:(.blueman-manager-wrapped)"
     ];
@@ -71,6 +72,7 @@
     general = {
       gaps_in = 5;
       gaps_out = 10;
+      resize_on_border = true;
     };
     decoration = {
       rounding = 10;
@@ -90,6 +92,10 @@
         "$mod, S, movetoworkspace, special:magic"
         "$mod, S, togglespecialworkspace, magic"
 
+        "$mod, Tab, cyclenext,"
+        "$mod, Tab, alterzorder, top"
+
+        "$mod SHIFT, F, togglefloating,"
       ]
       ++ (
         # workspaces
@@ -120,6 +126,16 @@
       ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
       ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     ];
+
+    #     # Move/resize windows with mainMod + LMB/RMB and dragging
+    # bindm = $mainMod, mouse:272, movewindow
+    # bindm = $mainMod, mouse:273, resizewindow
+
+    bindm = [
+      "$mod, mouse:272, movewindow"
+      "$mod, mouse:273, resizewindow"
+    ];
+
     input = {
       touchpad = {
         scroll_factor = 0.2;

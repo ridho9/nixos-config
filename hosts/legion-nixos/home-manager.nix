@@ -32,6 +32,8 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -68,6 +70,11 @@
     google-cloud-sdk
     postman
     grpcui
+
+    qbittorrent-enhanced
+    ghostty
+
+    godot_4
   ];
 
   programs.git = {
