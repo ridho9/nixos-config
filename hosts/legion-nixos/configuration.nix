@@ -174,6 +174,8 @@
     protobuf
     lm_sensors
     i2c-tools
+
+    cachix
   ];
 
   programs.nh.enable = true;

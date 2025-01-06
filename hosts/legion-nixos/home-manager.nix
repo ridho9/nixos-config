@@ -75,6 +75,8 @@
     ghostty
 
     godot_4
+    android-tools
+    scrcpy
   ];
 
   programs.git = {
