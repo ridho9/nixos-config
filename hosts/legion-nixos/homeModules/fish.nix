@@ -30,7 +30,6 @@ in
         cd = "z";
         ls = "eza";
       };
-      catppuccin.enable = true;
     };
 
     programs.direnv = {

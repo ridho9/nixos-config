@@ -4,7 +4,6 @@
   xdg.configFile."waybar/style.css".source = ./waybar.css;
   programs.waybar = {
     enable = true;
-    # catppuccin.enable = true;
     package = (
       pkgs.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

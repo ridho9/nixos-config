@@ -30,7 +30,6 @@
     device = "nodev";
     useOSProber = true;
     efiSupport = true;
-    catppuccin.enable = true;
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -87,7 +86,8 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -176,6 +176,7 @@
     i2c-tools
 
     cachix
+    gcc
   ];
 
   programs.nh.enable = true;
@@ -206,6 +207,13 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      80
+      443
+    ];
+  };
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.

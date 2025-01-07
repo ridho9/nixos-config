@@ -90,7 +90,6 @@
     settings = {
       font.normal.family = "FiraCode Nerd Font";
     };
-    catppuccin.enable = true;
   };
 
   gtk = {
