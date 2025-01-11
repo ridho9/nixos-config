@@ -15,6 +15,7 @@
     ./homeModules/lang/nix.nix
     ./homeModules/lang/go.nix
     ./homeModules/lang/js.nix
+    ./homeModules/lang/ocaml.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -77,6 +78,8 @@
     godot_4
     android-tools
     scrcpy
+
+    racket
   ];
 
   programs.git = {

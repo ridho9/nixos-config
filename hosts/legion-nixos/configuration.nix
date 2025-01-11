@@ -177,6 +177,8 @@
 
     cachix
     gcc
+
+    kind
   ];
 
   programs.nh.enable = true;
