@@ -179,6 +179,8 @@
     gcc
 
     kind
+    pkg-config
+    mariadb
   ];
 
   programs.nh.enable = true;

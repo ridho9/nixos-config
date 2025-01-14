@@ -80,6 +80,8 @@
     scrcpy
 
     racket
+    foliate
+    okular
   ];
 
   programs.git = {
