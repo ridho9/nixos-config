@@ -5,6 +5,7 @@
       pkgs.go
       pkgs.gopls
       pkgs.wgo
+      pkgs.delve
     ];
 
     programs.go = {

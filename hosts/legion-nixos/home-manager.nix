@@ -80,14 +80,19 @@
     scrcpy
 
     racket
-    foliate
     okular
+
+    beekeeper-studio
+    # jetbrains.datagrip
+
+    prismlauncher
   ];
 
   programs.git = {
     enable = true;
     userName = "ridho9";
     userEmail = "p.ridho9@gmail.com";
+    lfs.enable = true;
   };
 
   programs.alacritty = {
