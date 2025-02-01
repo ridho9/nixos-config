@@ -86,6 +86,8 @@
     # jetbrains.datagrip
 
     prismlauncher
+    ollama-cuda
+    open-webui
   ];
 
   programs.git = {
@@ -99,6 +101,7 @@
     enable = true;
     settings = {
       font.normal.family = "FiraCode Nerd Font";
+      env.TERM = "xterm-256color";
     };
   };
 
