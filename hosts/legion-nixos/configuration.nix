@@ -182,6 +182,7 @@
     kind
     pkg-config
     mariadb
+    ripgrep
   ];
 
   programs.nh.enable = true;
