@@ -87,9 +87,11 @@
 
     prismlauncher
     ollama-cuda
-    open-webui
+    # open-webui
 
     supabase-cli
+    php
+    dbeaver-bin
   ];
 
   programs.git = {

@@ -45,6 +45,7 @@
       "hypridle"
       "hyprpaper"
       "waybar"
+      "bluetooth on"
       # "hyprctl setcursor BreezeX-Black 32"
       # "blueman-applet && blueman-tray"
       "[workspace 1 silent] firefox-devedition"
