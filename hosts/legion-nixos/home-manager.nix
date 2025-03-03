@@ -92,6 +92,8 @@
     supabase-cli
     php
     dbeaver-bin
+    git-filter-repo
+    trippy
   ];
 
   programs.git = {
