@@ -80,7 +80,7 @@
     scrcpy
 
     racket
-    okular
+    kdePackages.okular
 
     beekeeper-studio
     # jetbrains.datagrip
