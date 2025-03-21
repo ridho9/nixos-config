@@ -94,6 +94,9 @@
     dbeaver-bin
     git-filter-repo
     trippy
+
+    adw-gtk3
+    adwaita-icon-theme
   ];
 
   programs.git = {
