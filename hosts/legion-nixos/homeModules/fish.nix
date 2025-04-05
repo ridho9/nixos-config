@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   catppuccin-fish = pkgs.fetchFromGitHub {
     owner = "catppuccin";
@@ -44,6 +44,6 @@ in
     programs.starship = {
       enable = true;
     };
-    xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
+    xdg.configFile."starship.toml".source = lib.mkForce ./dotfiles/starship.toml;
   };
 }

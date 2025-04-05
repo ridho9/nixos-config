@@ -97,6 +97,10 @@
 
     adw-gtk3
     adwaita-icon-theme
+
+    # wineWowPackages.stable
+    winetricks
+    wineWowPackages.waylandFull
   ];
 
   programs.git = {
