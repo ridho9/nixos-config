@@ -137,4 +137,7 @@
     enable = true;
   };
 
+  programs.rio = {
+    enable = true;
+  };
 }
