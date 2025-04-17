@@ -101,6 +101,7 @@
     # wineWowPackages.stable
     winetricks
     wineWowPackages.waylandFull
+    xarchiver
   ];
 
   programs.git = {
