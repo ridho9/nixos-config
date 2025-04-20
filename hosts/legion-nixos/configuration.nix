@@ -186,6 +186,8 @@
     ripgrep
 
     gnumake
+
+    zig
   ];
 
   programs.nh.enable = true;
