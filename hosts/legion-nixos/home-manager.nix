@@ -73,9 +73,9 @@
     grpcui
 
     qbittorrent-enhanced
-    ghostty
+    # ghostty
 
-    godot_4
+    # godot_4
     android-tools
     scrcpy
 

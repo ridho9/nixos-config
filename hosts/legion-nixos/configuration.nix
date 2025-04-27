@@ -188,6 +188,7 @@
     gnumake
 
     zig
+    zls
   ];
 
   programs.nh.enable = true;
