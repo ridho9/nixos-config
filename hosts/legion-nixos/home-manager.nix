@@ -51,8 +51,8 @@
 
     wayland-scanner
 
-    obs-studio
-    obs-studio-plugins.wlrobs
+    # obs-studio
+    # obs-studio-plugins.wlrobs
 
     mpv
 
@@ -64,36 +64,32 @@
     postgresql
     valkey
 
-    cbqn
-    uiua
+    # cbqn
+    # uiua
     hyperfine
     caddy
     google-cloud-sdk
     postman
-    grpcui
+    # grpcui
 
     qbittorrent-enhanced
-    # ghostty
 
-    # godot_4
-    android-tools
     scrcpy
 
-    racket
+    # racket
     kdePackages.okular
 
     beekeeper-studio
-    # jetbrains.datagrip
 
     prismlauncher
-    ollama-cuda
+    # ollama-cuda
     # open-webui
 
     supabase-cli
     php
     dbeaver-bin
     git-filter-repo
-    trippy
+    # trippy
 
     adw-gtk3
     adwaita-icon-theme
@@ -102,6 +98,8 @@
     winetricks
     wineWowPackages.waylandFull
     xarchiver
+
+    confluent-cli
   ];
 
   programs.git = {
@@ -138,7 +136,7 @@
     enable = true;
   };
 
-  programs.rio = {
-    enable = true;
-  };
+  # programs.rio = {
+  #   enable = true;
+  # };
 }
