@@ -100,6 +100,7 @@
     xarchiver
 
     confluent-cli
+    act
   ];
 
   programs.git = {
