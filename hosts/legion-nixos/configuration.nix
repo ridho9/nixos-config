@@ -305,5 +305,5 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.1.5" ];
+  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.2.9" ];
 }

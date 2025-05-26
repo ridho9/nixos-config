@@ -101,6 +101,8 @@
 
     confluent-cli
     act
+
+    protonplus
   ];
 
   programs.git = {
