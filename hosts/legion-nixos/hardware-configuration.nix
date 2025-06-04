@@ -70,4 +70,5 @@
   hardware.i2c.enable = true;
 
   hardware.acpilight.enable = true;
+
 }

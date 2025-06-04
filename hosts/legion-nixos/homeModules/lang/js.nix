@@ -6,7 +6,9 @@
       yarn
       deno
       pnpm
+
       nodePackages."@nestjs/cli"
+      turbo
     ];
 
     programs.bun.enable = true;

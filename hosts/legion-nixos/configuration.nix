@@ -189,6 +189,9 @@
 
     zig
     zls
+
+    helix
+    tree
   ];
 
   programs.nh.enable = true;
@@ -306,4 +309,6 @@
   hardware.xpadneo.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.2.9" ];
+
+  boot.supportedFilesystems = [ "ntfs" ];
 }
