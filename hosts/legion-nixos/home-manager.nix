@@ -43,7 +43,7 @@
     # thunderbird
     vscode-fhs
     firefox-devedition
-    brave
+    # brave
     discord
 
     fastfetch
