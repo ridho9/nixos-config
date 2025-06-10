@@ -85,7 +85,7 @@
         "$mod, T, exec, alacritty"
         # "$mod, Space, exec, rofi -show drun -show-icons"
         "$mod, Space, exec, fuzzel"
-        ", Print, exec, grimblast copysave area | xargs notify-send"
+        ", Print, exec, grimblast --notify --freeze copysave area"
 
         "$mod, S, togglespecialworkspace, magic"
         "$mod, S, movetoworkspace, +0"
