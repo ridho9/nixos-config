@@ -16,6 +16,7 @@
     ./hardware-configuration.nix
 
     ./stylix.nix
+    ./niri.nix
   ];
 
   nix.settings.experimental-features = [
@@ -116,6 +117,7 @@
       "video"
       "input"
       "docker"
+      "ollama"
     ];
     shell = pkgs.fish;
     hashedPassword = "$6$AzOsDEZH9zFSF0AT$g9pxQMibYSOm390jTMiTzYhxT50yM8AsjDAbCfmqkwKT4VdddZ8xTu.3dC44yOsiCt24dniIBNJDZaKfOIGws1";
@@ -308,7 +310,12 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.2.9" ];
+  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.2.12" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
 }
