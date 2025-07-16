@@ -103,6 +103,7 @@
     act
 
     protonplus
+    code-cursor-fhs
   ];
 
   programs.git = {
