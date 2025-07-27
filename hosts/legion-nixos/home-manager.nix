@@ -104,6 +104,8 @@
 
     protonplus
     code-cursor-fhs
+
+    zed-editor-fhs
   ];
 
   programs.git = {

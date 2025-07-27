@@ -29,6 +29,7 @@ in
       shellAliases = {
         cd = "z";
         ls = "eza";
+        zed = "zeditor";
       };
     };
 
