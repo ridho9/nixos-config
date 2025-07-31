@@ -192,8 +192,9 @@
     zig
     zls
 
-    helix
     tree
+
+    libsecret
   ];
 
   programs.nh.enable = true;
@@ -256,6 +257,7 @@
     # WLR_NO_HARDWARE_CURSORS = "1";
     # NIXOS_OZONE_WL = "1";
     EDITOR = "nvim";
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/keyring/ssh";
   };
 
   hardware.graphics.enable = true;
@@ -278,6 +280,12 @@
   '';
 
   security.pam.services.swaylock = { };
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services = {
+    login.enableGnomeKeyring = true;
+    ly.enableGnomeKeyring = true;
+  };
 
   programs.steam = {
     enable = true;
@@ -318,4 +326,5 @@
     enable = true;
     acceleration = "cuda";
   };
+  programs.niri.enable = true;
 }
