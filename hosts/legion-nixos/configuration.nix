@@ -102,7 +102,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
+  security.polkit.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -194,6 +194,8 @@
     tree
 
     libsecret
+    polkit_gnome
+    jq
   ];
 
   programs.nh.enable = true;
