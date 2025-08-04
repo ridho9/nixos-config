@@ -50,27 +50,17 @@
     gh
 
     wayland-scanner
-
-    # obs-studio
-    # obs-studio-plugins.wlrobs
-
     mpv
-
     httpie
-
     slack
     devenv
-
     postgresql
     valkey
 
-    # cbqn
-    # uiua
     hyperfine
     caddy
     google-cloud-sdk
     postman
-    # grpcui
 
     qbittorrent-enhanced
 
@@ -82,8 +72,6 @@
     beekeeper-studio
 
     prismlauncher
-    # ollama-cuda
-    # open-webui
 
     supabase-cli
     php
@@ -94,19 +82,22 @@
     adw-gtk3
     adwaita-icon-theme
 
-    # wineWowPackages.stable
     winetricks
     wineWowPackages.waylandFull
     xarchiver
-
-    confluent-cli
-    act
 
     protonplus
     code-cursor-fhs
 
     zed-editor-fhs
+
+    dbus
   ];
+
+  services.gnome-keyring.enable = true;
+  # services.blueman-applet.enable = true;
+
+  xdg.autostart.enable = true;
 
   programs.git = {
     enable = true;
@@ -120,6 +111,7 @@
     settings = {
       font.normal.family = "FiraCode Nerd Font";
       env.TERM = "xterm-256color";
+      window.decorations = "none";
     };
   };
 
@@ -138,9 +130,9 @@
     };
   };
 
-  programs.wezterm = {
-    enable = true;
-  };
+  # programs.wezterm = {
+  #   enable = true;
+  # };
 
   # programs.rio = {
   #   enable = true;

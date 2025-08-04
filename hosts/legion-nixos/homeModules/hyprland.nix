@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -42,9 +43,6 @@
 
     "$mod" = "SUPER";
     exec-once = [
-      "hypridle"
-      "hyprpaper"
-      "waybar"
       "bluetooth on"
       # "hyprctl setcursor BreezeX-Black 32"
       # "blueman-applet && blueman-tray"
@@ -78,46 +76,45 @@
     decoration = {
       rounding = 10;
     };
-    bind =
-      [
-        "$mod SHIFT, Q, killactive"
-        "$mod, F, exec, firefox-devedition"
-        "$mod, T, exec, alacritty"
-        # "$mod, Space, exec, rofi -show drun -show-icons"
-        "$mod, Space, exec, fuzzel"
-        ", Print, exec, grimblast --notify --freeze copysave area"
+    bind = [
+      "$mod SHIFT, Q, killactive"
+      "$mod, F, exec, firefox-devedition"
+      "$mod, T, exec, alacritty"
+      # "$mod, Space, exec, rofi -show drun -show-icons"
+      "$mod, Space, exec, fuzzel"
+      ", Print, exec, grimblast --notify --freeze copysave area"
 
-        "$mod, S, togglespecialworkspace, magic"
-        "$mod, S, movetoworkspace, +0"
-        "$mod, S, togglespecialworkspace, magic"
-        "$mod, S, movetoworkspace, special:magic"
-        "$mod, S, togglespecialworkspace, magic"
+      "$mod, S, togglespecialworkspace, magic"
+      "$mod, S, movetoworkspace, +0"
+      "$mod, S, togglespecialworkspace, magic"
+      "$mod, S, movetoworkspace, special:magic"
+      "$mod, S, togglespecialworkspace, magic"
 
-        "$mod, Tab, cyclenext,"
-        "$mod, Tab, alterzorder, top"
+      "$mod, Tab, cyclenext,"
+      "$mod, Tab, alterzorder, top"
 
-        "$mod SHIFT, F, togglefloating,"
+      "$mod SHIFT, F, togglefloating,"
+    ]
+    ++ (
+      # workspaces
+      # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+      (builtins.concatLists (
+        builtins.genList (
+          i:
+          let
+            ws = i + 1;
+          in
+          [
+            "$mod, code:1${toString i}, workspace, ${toString ws}"
+            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+          ]
+        ) 9
+      ))
+      ++ [
+        "$mod, code:19, workspace, 10"
+        "$mod SHIFT, code:19, movetoworkspace, 10"
       ]
-      ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-        (builtins.concatLists (
-          builtins.genList (
-            i:
-            let
-              ws = i + 1;
-            in
-            [
-              "$mod, code:1${toString i}, workspace, ${toString ws}"
-              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-            ]
-          ) 9
-        ))
-        ++ [
-          "$mod, code:19, workspace, 10"
-          "$mod SHIFT, code:19, movetoworkspace, 10"
-        ]
-      );
+    );
     bindl = [
       ", XF86MonBrightnessUp, exec, xbacklight +5"
       '', XF86MonBrightnessDown, execr, [ "$(xbacklight -get)" -gt 5 ] && xbacklight -5''
@@ -147,10 +144,12 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
     ];
-    config.common.default = "*";
+    # config.common.default = "*";
+    xdgOpenUsePortal = true;
   };
 
   services.mako = {
@@ -171,34 +170,55 @@
     };
   };
 
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        # lock_cmd = ''notify-send "lock!"''; # dbus/sysd lock command (loginctl lock-session)
-
-        lock_cmd = ''pidof swaylock || swaylock'';
-        # unlock_cmd = ''notify-send "unlock!"''; # same as above, but unlock
-        before_sleep_cmd = ''pidof swaylock || swaylock''; # command ran before sleep
-        # after_sleep_cmd = ''notify-send "Awake!"''; # command ran after sleep
-
-        ignore_dbus_inhibit = false; # whether to ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
-        ignore_systemd_inhibit = false; # whether to ignore systemd-inhibit --what=idle inhibitors
+  systemd.user.services = {
+    hyprpaper = {
+      Unit = {
+        ConditionEnvironment = lib.mkForce [
+          "WAYLAND_DISPLAY"
+          "XDG_CURRENT_DESKTOP=hyprland"
+        ];
       };
-
-      # listener = {
-      #   timeout = 500; # in seconds
-      #   on-timeout = ''notify-send "You are idle!"''; # command to run when timeout has passed
-      #   on-resume = ''notify-send "Welcome back!"''; # command to run when activity is detected after timeout has fired.
-      # };
+    };
+    hypridle = {
+      Unit = {
+        Description = "Hyprland Idle Daemon";
+        PartOf = [ "hyprland-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.hypridle}/bin/hypridle";
+      };
+      Install = {
+        WantedBy = [ "hyprland-session.target" ];
+      };
+    };
+    waybar = {
+      Unit = {
+        Description = "Waybar";
+        PartOf = [ "hyprland-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.waybar}/bin/waybar";
+      };
+      Install = {
+        WantedBy = [ "hyprland-session.target" ];
+      };
     };
   };
 
-  # services.hyprpaper = {
+  # services.hypridle = {
   #   enable = true;
   #   settings = {
-  #     preload = [ "~/Pictures/wallpaper/5.png" ];
-  #     wallpaper = [ ",~/Pictures/wallpaper/5.png" ];
+  #     general = {
+  #       # lock_cmd = ''notify-send "lock!"''; # dbus/sysd lock command (loginctl lock-session)
+
+  #       lock_cmd = ''pidof swaylock || swaylock'';
+  #       # unlock_cmd = ''notify-send "unlock!"''; # same as above, but unlock
+  #       before_sleep_cmd = ''pidof swaylock || swaylock''; # command ran before sleep
+  #       # after_sleep_cmd = ''notify-send "Awake!"''; # command ran after sleep
+
+  #       ignore_dbus_inhibit = false; # whether to ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
+  #       ignore_systemd_inhibit = false; # whether to ignore systemd-inhibit --what=idle inhibitors
+  #     };
   #   };
   # };
 }

@@ -12,6 +12,7 @@
     settings = [
       {
         modules-left = [
+          "niri/workspaces"
           "hyprland/workspaces"
           "hyprland/submap"
         ];
@@ -40,6 +41,20 @@
             "class<steam>" = "";
             "class<Godot>" = "";
           };
+        };
+
+        "niri/workspaces" = {
+          # format = "{icon} {windows} ";
+          # window-rewrite-default = "?";
+          # window-rewrite = {
+          #   "class<firefox>" = "";
+          #   "class<discord>" = "";
+          #   "class<Code>" = "";
+          #   "class<Alacritty>" = "";
+          #   "class<Slack>" = "";
+          #   "class<steam>" = "";
+          #   "class<Godot>" = "";
+          # };
         };
 
         temperature = {

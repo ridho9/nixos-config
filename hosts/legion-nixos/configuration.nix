@@ -117,7 +117,6 @@
       "video"
       "input"
       "docker"
-      "ollama"
     ];
     shell = pkgs.fish;
     hashedPassword = "$6$AzOsDEZH9zFSF0AT$g9pxQMibYSOm390jTMiTzYhxT50yM8AsjDAbCfmqkwKT4VdddZ8xTu.3dC44yOsiCt24dniIBNJDZaKfOIGws1";
@@ -132,7 +131,7 @@
     users.rid9 = {
       imports = [
         ./home-manager.nix
-        inputs.catppuccin.homeManagerModules.catppuccin
+        inputs.catppuccin.homeModules.catppuccin
       ];
     };
 
@@ -321,10 +320,4 @@
   nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.2.12" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
-
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
-  programs.niri.enable = true;
 }
