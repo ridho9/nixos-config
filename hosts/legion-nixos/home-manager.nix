@@ -92,6 +92,8 @@
     zed-editor-fhs
 
     dbus
+    temporal-cli
+    zellij
   ];
 
   services.gnome-keyring.enable = true;
