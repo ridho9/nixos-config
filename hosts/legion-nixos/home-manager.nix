@@ -94,6 +94,8 @@
     dbus
     temporal-cli
     zellij
+
+    jdk8
   ];
 
   services.gnome-keyring.enable = true;
