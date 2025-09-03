@@ -322,7 +322,7 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.2.12" ];
+  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.3.4" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 }
