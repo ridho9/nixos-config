@@ -96,9 +96,15 @@
     zellij
 
     jdk8
+    
+    # Secret management
+    seahorse
   ];
 
-  services.gnome-keyring.enable = true;
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
+  };
   # services.blueman-applet.enable = true;
 
   xdg.autostart.enable = true;
@@ -113,12 +119,15 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gnome
     ];
-    # config.common.default = "*";
+    config.common = {
+      default = [ "gtk" ];
+      "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+      "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+      "org.freedesktop.impl.portal.Secret" = [ "gnome" ];
+    };
     xdgOpenUsePortal = true;
   };
 

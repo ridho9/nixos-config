@@ -103,6 +103,14 @@
     #media-session.enable = true;
   };
   security.polkit.enable = true;
+  
+  # Enable XDG portals for file dialogs and other desktop integrations
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
