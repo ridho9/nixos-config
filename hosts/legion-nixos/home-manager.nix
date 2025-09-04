@@ -10,6 +10,7 @@
   imports = [
     ./homeModules/fish.nix
     ./homeModules/hyprland.nix
+    ./homeModules/bitwarden.nix
 
     ./homeModules/lang/python3.nix
     ./homeModules/lang/nix.nix
@@ -34,6 +35,11 @@
   home.stateVersion = "24.05";
 
   home.sessionPath = [ "$HOME/.local/bin" ];
+
+  home.sessionVariables = {
+    # Configure uv to use a specific Python interpreter on NixOS
+    UV_PYTHON = "/etc/profiles/per-user/rid9/bin/python3";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -123,7 +129,8 @@
       pkgs.xdg-desktop-portal-gnome
     ];
     config.common = {
-      default = [ "gtk" ];
+      default = [ "gnome" ];
+      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
       "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
       "org.freedesktop.impl.portal.Secret" = [ "gnome" ];
