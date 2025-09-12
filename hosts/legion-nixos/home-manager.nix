@@ -101,15 +101,19 @@
     temporal-cli
     zellij
 
-    jdk8
-    
+    jdk21
+
     # Secret management
     seahorse
   ];
 
   services.gnome-keyring = {
     enable = true;
-    components = [ "pkcs11" "secrets" "ssh" ];
+    components = [
+      "pkcs11"
+      "secrets"
+      "ssh"
+    ];
   };
   # services.blueman-applet.enable = true;
 
