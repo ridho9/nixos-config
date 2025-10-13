@@ -34,7 +34,10 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/.pnpm"
+  ];
 
   home.sessionVariables = {
     # Configure uv to use a specific Python interpreter on NixOS
@@ -105,6 +108,9 @@
 
     # Secret management
     seahorse
+
+    obs-studio
+    spotify
   ];
 
   services.gnome-keyring = {
@@ -148,6 +154,7 @@
       font.normal.family = "FiraCode Nerd Font";
       env.TERM = "xterm-256color";
       window.decorations = "none";
+      font.size = 12;
     };
   };
 
@@ -173,4 +180,13 @@
   # programs.rio = {
   #   enable = true;
   # };
+
+  programs.ghostty = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      font-family = "FiraCode Nerd Font";
+      font-size = 12;
+    };
+  };
 }
