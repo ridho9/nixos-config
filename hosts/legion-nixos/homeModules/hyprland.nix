@@ -6,34 +6,15 @@
   ...
 }:
 {
-  imports = [
-    ./waybar/waybar.nix
-  ];
-
   home.packages = with pkgs; [
-    libnotify
-    # rofi-wayland
-    grim
-    slurp
-
-    wl-clipboard
     hyprshot
     grimblast
-    pavucontrol
     hypridle
     hyprpaper
-
-    pipewire
-    wireplumber
     xdg-desktop-portal-hyprland
     hyprpolkitagent
-
     inputs.hyprland-qtutils.packages."${pkgs.system}".default
   ];
-
-  home.sessionVariables = {
-    XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Pictures/Screenshots";
-  };
 
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   wayland.windowManager.hyprland.settings = {
@@ -141,23 +122,6 @@
     };
   };
 
-  services.mako = {
-    enable = true;
-    defaultTimeout = 2000;
-  };
-
-  programs.fuzzel = {
-    enable = true;
-  };
-
-  programs.swaylock = {
-    enable = true;
-    package = pkgs.swaylock-effects;
-    settings = {
-      indicator = true;
-      clock = true;
-    };
-  };
 
   systemd.user.services = {
     hyprpaper = {

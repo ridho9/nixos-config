@@ -10,7 +10,7 @@
 
     programs.go = {
       enable = true;
-      goBin = ".local/bin.go";
+      env.GOBIN = ".local/bin.go";
     };
 
     home.sessionPath = [ "$HOME/.local/bin.go" ];

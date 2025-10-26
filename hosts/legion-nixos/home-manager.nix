@@ -3,13 +3,14 @@
   pkgs,
   lib,
   input,
+  mySystem,
   ...
 }:
 
 {
   imports = [
     ./homeModules/fish.nix
-    ./homeModules/hyprland.nix
+    ./homeModules/wayland-common.nix
     ./homeModules/bitwarden.nix
 
     ./homeModules/lang/python3.nix
@@ -17,7 +18,8 @@
     ./homeModules/lang/go.nix
     ./homeModules/lang/js.nix
     ./homeModules/lang/ocaml.nix
-  ];
+  ]
+  ++ lib.optional mySystem.hyprland.enable ./homeModules/hyprland.nix;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -127,8 +129,8 @@
 
   programs.git = {
     enable = true;
-    userName = "ridho9";
-    userEmail = "p.ridho9@gmail.com";
+    settings.user.name = "ridho9";
+    settings.user.email = "p.ridho9@gmail.com";
     lfs.enable = true;
   };
 

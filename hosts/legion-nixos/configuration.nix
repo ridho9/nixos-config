@@ -15,14 +15,34 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    ./options.nix
     ./stylix.nix
+    ./hyprland.nix
     ./niri.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    max-jobs = "auto";
+    cores = 0;
+    auto-optimise-store = true;
+    warn-dirty = false;
+    builders-use-substitutes = true;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
+  };
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -103,7 +123,7 @@
     #media-session.enable = true;
   };
   security.polkit.enable = true;
-  
+
   # Enable XDG portals for file dialogs and other desktop integrations
   services.dbus.enable = true;
   xdg.portal = {
@@ -135,6 +155,7 @@
     useUserPackages = true;
     extraSpecialArgs = {
       inherit inputs;
+      mySystem = config.mySystem;
     };
     users.rid9 = {
       imports = [
@@ -200,6 +221,7 @@
     zls
 
     tree
+    file
 
     libsecret
     polkit_gnome
@@ -255,12 +277,6 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   time.hardwareClockInLocalTime = true;
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-  };
 
   environment.sessionVariables = {
     # WLR_NO_HARDWARE_CURSORS = "1";
