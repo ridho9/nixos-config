@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   config = {
     home.packages = [
@@ -6,13 +6,15 @@
       pkgs.gopls
       pkgs.wgo
       pkgs.delve
+      pkgs.go-tools
+      pkgs.impl
     ];
 
     programs.go = {
       enable = true;
-      env.GOBIN = ".local/bin.go";
+      env.GOBIN = "${config.home.homeDirectory}/.local/bin.go";
     };
 
-    home.sessionPath = [ "$HOME/.local/bin.go" ];
+    home.sessionPath = [ "${config.home.homeDirectory}/.local/bin.go" ];
   };
 }

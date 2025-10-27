@@ -21,6 +21,8 @@
     ./niri.nix
   ];
 
+  specialisation = lib.mkForce { };
+
   nix.settings = {
     experimental-features = [
       "nix-command"
@@ -31,6 +33,8 @@
     auto-optimise-store = true;
     warn-dirty = false;
     builders-use-substitutes = true;
+    http-connections = 128;
+    max-substitution-jobs = 128;
   };
 
   nix.gc = {
