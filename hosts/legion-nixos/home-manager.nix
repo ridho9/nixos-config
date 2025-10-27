@@ -2,38 +2,29 @@
   config,
   pkgs,
   lib,
-  input,
+  inputs,
   mySystem,
   ...
 }:
 
 {
   imports = [
-    ./homeModules/fish.nix
-    ./homeModules/wayland-common.nix
-    ./homeModules/bitwarden.nix
+    ../../modules/home/fish.nix
+    ../../modules/home/wayland-common.nix
+    ../../modules/home/bitwarden.nix
 
-    ./homeModules/lang/python3.nix
-    ./homeModules/lang/nix.nix
-    ./homeModules/lang/go.nix
-    ./homeModules/lang/js.nix
-    ./homeModules/lang/ocaml.nix
+    ../../modules/home/lang/python3.nix
+    ../../modules/home/lang/nix.nix
+    ../../modules/home/lang/go.nix
+    ../../modules/home/lang/js.nix
+    ../../modules/home/lang/ocaml.nix
+
+    ./homeModules/waybar/waybar.nix
   ]
   ++ lib.optional mySystem.hyprland.enable ./homeModules/hyprland.nix;
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
   home.username = "rid9";
   home.homeDirectory = "/home/rid9";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "24.05";
 
   home.sessionPath = [
@@ -42,16 +33,12 @@
   ];
 
   home.sessionVariables = {
-    # Configure uv to use a specific Python interpreter on NixOS
     UV_PYTHON = "/etc/profiles/per-user/rid9/bin/python3";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    # betterbird
-    # thunderbird
     vscode-fhs
     firefox-devedition
     brave
@@ -76,8 +63,6 @@
     qbittorrent-enhanced
 
     scrcpy
-
-    # racket
     kdePackages.okular
 
     beekeeper-studio
@@ -88,7 +73,6 @@
     php
     dbeaver-bin
     git-filter-repo
-    # trippy
 
     adw-gtk3
     adwaita-icon-theme
@@ -107,8 +91,6 @@
     zellij
 
     jdk21
-
-    # Secret management
     seahorse
 
     obs-studio
@@ -123,7 +105,6 @@
       "ssh"
     ];
   };
-  # services.blueman-applet.enable = true;
 
   xdg.autostart.enable = true;
 
@@ -174,14 +155,6 @@
       gtk-application-prefer-dark-theme = 1;
     };
   };
-
-  # programs.wezterm = {
-  #   enable = true;
-  # };
-
-  # programs.rio = {
-  #   enable = true;
-  # };
 
   programs.ghostty = {
     enable = true;

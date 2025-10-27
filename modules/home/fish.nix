@@ -46,6 +46,5 @@ in
       enable = true;
       settings = (builtins.fromTOML (builtins.readFile ./dotfiles/starship.toml));
     };
-    # xdg.configFile."starship.toml".source = lib.mkDefault ./dotfiles/starship.toml;
   };
 }

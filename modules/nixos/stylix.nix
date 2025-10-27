@@ -10,8 +10,6 @@
       package = pkgs.nerd-fonts.fira-code;
       name = "FiraCode Nerd Font";
     };
-    # serif = config.stylix.fonts.monospace;
-    # sansSerif = config.stylix.fonts.monospace;
     sizes.applications = 10;
   };
 

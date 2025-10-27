@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ./waybar/waybar.nix
-  ];
-
   home.packages = with pkgs; [
     libnotify
     grim
