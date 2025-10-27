@@ -256,11 +256,11 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "bluetooth" "on"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "swayidle" "-w" "before-sleep" "swaylock -f" "lock" "swaylock -f"
+spawn-at-startup "wl-clip-persist" "--clipboard" "regular"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -289,7 +289,6 @@ animations {
 }
 
 environment {
-    DISPLAY ":0"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
@@ -370,6 +369,7 @@ binds {
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Shift+P hotkey-overlay-title="Bitwarden Password Manager: rofi-rbw" { spawn "rofi-rbw"; }
     // Mod+P hotkey-overlay-title="Bitwarden Password Manager: fuzzel-bitwarden" { spawn "fuzzel-bitwarden"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.

@@ -10,6 +10,7 @@
     grim
     slurp
     wl-clipboard
+    wl-clip-persist
     pavucontrol
     pipewire
     wireplumber
@@ -17,6 +18,7 @@
 
   home.sessionVariables = {
     XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Pictures/Screenshots";
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
   };
 
   services.mako = {
@@ -26,6 +28,14 @@
 
   programs.fuzzel = {
     enable = true;
+    settings = {
+      main = {
+        width = 60;
+        lines = 20;
+        terminal = "${pkgs.alacritty}/bin/alacritty";
+        fields = "filename,name,generic,keywords";
+      };
+    };
   };
 
   programs.swaylock = {

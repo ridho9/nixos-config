@@ -12,6 +12,7 @@
     ../../modules/home/fish.nix
     ../../modules/home/wayland-common.nix
     ../../modules/home/bitwarden.nix
+    ../../modules/home/neovim.nix
 
     ../../modules/home/lang/python3.nix
     ../../modules/home/lang/nix.nix
