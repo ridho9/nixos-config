@@ -96,6 +96,13 @@
 
     obs-studio
     spotify
+    yt-dlp
+
+    ncdu
+    dua
+    mozjpeg
+    optipng
+    pngquant
   ];
 
   services.gnome-keyring = {
@@ -164,5 +171,9 @@
       font-family = "FiraCode Nerd Font";
       font-size = 12;
     };
+  };
+
+  programs.rclone = {
+    enable = true;
   };
 }
