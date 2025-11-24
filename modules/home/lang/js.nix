@@ -8,7 +8,7 @@
       pnpm
 
       nodePackages."@nestjs/cli"
-      turbo
+      # turbo
     ];
 
     programs.bun.enable = true;
