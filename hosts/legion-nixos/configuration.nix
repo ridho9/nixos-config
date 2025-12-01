@@ -189,6 +189,8 @@
     libsecret
     polkit_gnome
     jq
+
+    file-roller
   ];
 
   programs.nh.enable = true;
@@ -261,7 +263,7 @@
       thunar-volman
     ];
   };
-  programs.file-roller.enable = true;
+  # programs.file-roller.enable = true;
   xdg.mime.defaultApplications."inode/directory" = "thunar.desktop";
   services.tumbler.enable = true;
   services.gvfs.enable = true;
