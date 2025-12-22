@@ -103,6 +103,8 @@
     mozjpeg
     optipng
     pngquant
+
+    google-cloud-sql-proxy
   ];
 
   services.gnome-keyring = {
