@@ -105,6 +105,7 @@
     pngquant
 
     google-cloud-sql-proxy
+    antigravity-fhs
   ];
 
   services.gnome-keyring = {

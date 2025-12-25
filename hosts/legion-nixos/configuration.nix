@@ -59,6 +59,8 @@
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+
+  hardware.enableRedistributableFirmware = true;
   networking.networkmanager.enable = true;
 
   time.timeZone = lib.mkDefault "Asia/Jakarta";
