@@ -36,8 +36,19 @@
     max-substitution-jobs = 128;
   };
 
+  # Kernel & Power Optimizations
+  boot.kernelParams = [ "amd_pstate=active" ];
+  boot.kernel.sysctl = {
+    "vm.vfs_cache_pressure" = 50;
+    "vm.swappiness" = 10;
+    "vm.dirty_ratio" = 10;
+    "vm.dirty_background_ratio" = 5;
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "net.core.default_qdisc" = "cake";
+  };
+
   nix.gc = {
-    automatic = true;
+    automatic = false;
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
@@ -196,6 +207,8 @@
   ];
 
   programs.nh.enable = true;
+  programs.nh.clean.enable = true;
+  programs.nh.clean.extraArgs = "--keep-since 14d --keep 5";
   programs.nh.flake = "/home/rid9/nixos-config";
 
   programs.fish.enable = true;
@@ -231,7 +244,32 @@
     powerManagement.enable = true;
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      amdgpuBusId = "PCI:6:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
+
+  # Power Management (TLP + Thermald)
+  services.power-profiles-daemon.enable = false; # Conflict with TLP
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+  };
+  services.thermald.enable = true;
 
   services.blueman.enable = true;
 
