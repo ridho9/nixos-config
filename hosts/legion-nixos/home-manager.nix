@@ -106,6 +106,10 @@
 
     google-cloud-sql-proxy
     antigravity-fhs
+
+    awscli2
+    terraform
+    cdktf-cli
   ];
 
   services.gnome-keyring = {

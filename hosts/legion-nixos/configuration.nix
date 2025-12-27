@@ -284,5 +284,11 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
   programs.fuse.userAllowOther = true;
 }
