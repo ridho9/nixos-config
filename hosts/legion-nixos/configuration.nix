@@ -28,7 +28,7 @@
       "flakes"
     ];
     max-jobs = "auto";
-    cores = 0;
+    cores = 8;
     auto-optimise-store = true;
     warn-dirty = false;
     builders-use-substitutes = true;
@@ -237,6 +237,7 @@
   };
 
   hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = [ pkgs.nvidia-vaapi-driver ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;

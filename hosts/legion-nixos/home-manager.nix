@@ -94,7 +94,7 @@
     jdk21
     seahorse
 
-    obs-studio
+    spotify
     spotify
     yt-dlp
 
@@ -182,5 +182,17 @@
 
   programs.rclone = {
     enable = true;
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+    ];
+    package = pkgs.obs-studio.override {
+      cudaSupport = true;
+    };
   };
 }
