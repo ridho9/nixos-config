@@ -54,11 +54,13 @@
   };
 
   # OOM Prevention
+  # OOM Prevention
+  # OOM Prevention
   services.earlyoom = {
     enable = true;
-    enableNotifications = true;
-    freeMemThreshold = 5; # Kill if RAM < 5%
-    freeSwapThreshold = 5; # AND Swap < 5%
+    enableNotifications = false;
+    freeMemThreshold = 5;
+    freeSwapThreshold = 5;
   };
 
   nix.optimise = {
@@ -132,6 +134,7 @@
       "video"
       "input"
       "docker"
+      "systemd-journal"
     ];
     shell = pkgs.fish;
     hashedPassword = "$6$AzOsDEZH9zFSF0AT$g9pxQMibYSOm390jTMiTzYhxT50yM8AsjDAbCfmqkwKT4VdddZ8xTu.3dC44yOsiCt24dniIBNJDZaKfOIGws1";

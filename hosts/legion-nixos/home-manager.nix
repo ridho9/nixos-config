@@ -184,6 +184,34 @@
     enable = true;
   };
 
+  systemd.user.services.earlyoom-watcher = {
+    Unit = {
+      Description = "EarlyOOM Log Watcher Notification";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = pkgs.writeShellScript "watch-earlyoom" ''
+        # Monitor journal for EarlyOOM kill events
+        # grep --line-buffered ensures immediate pipe output
+        ${pkgs.systemd}/bin/journalctl -u earlyoom -f -n 0 -o cat | \
+        ${pkgs.ripgrep}/bin/rg --line-buffered "sending SIGTERM" | \
+        while read -r line; do
+          ${pkgs.libnotify}/bin/notify-send \
+            -u critical \
+            -t 5000 \
+            -i dialog-error \
+            "EarlyOOM Killer" \
+            "$line"
+        done
+      '';
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
