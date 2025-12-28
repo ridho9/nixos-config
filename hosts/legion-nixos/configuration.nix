@@ -269,8 +269,12 @@
 
   virtualisation.docker.enable = true;
 
-  services.logind.settings.Login = {
-    HandlePowerKey = "suspend";
+  services.logind.settings = {
+    Login = {
+      HandlePowerKey = "suspend";
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
+    };
   };
 
   security.pam.services.swaylock = { };
