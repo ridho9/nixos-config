@@ -3,6 +3,13 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
+debug {
+    // Force Niri to use the AMD iGPU (card1) to allow Nvidia dGPU to sleep
+    render-drm-device "/dev/dri/by-path/pci-0000:06:00.0-card"
+    // Explicitly ignore Nvidia GPU to prevent Niri from keeping it awake
+    ignore-drm-device "/dev/dri/by-path/pci-0000:01:00.0-card"
+}
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input

@@ -16,8 +16,8 @@
 
     ../../modules/nixos/options.nix
     ../../modules/nixos/stylix.nix
-    ./hyprland.nix
     ./niri.nix
+    ./nvidia-hybrid.nix
   ];
 
   specialisation = lib.mkForce { };
@@ -38,6 +38,7 @@
 
   # Kernel & Power Optimizations
   boot.kernelParams = [ "amd_pstate=active" ];
+  
   boot.kernel.sysctl = {
     "vm.vfs_cache_pressure" = 50;
     "vm.swappiness" = 10;
@@ -245,25 +246,6 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/keyring/ssh";
-  };
-
-  hardware.graphics.enable = true;
-  hardware.graphics.extraPackages = [ pkgs.nvidia-vaapi-driver ];
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    powerManagement.enable = true;
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-      amdgpuBusId = "PCI:6:0:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
   };
 
   # Power Management (TLP + Thermald)
