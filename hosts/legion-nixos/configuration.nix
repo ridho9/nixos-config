@@ -53,6 +53,14 @@
     options = "--delete-older-than 30d";
   };
 
+  # OOM Prevention
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+    freeMemThreshold = 5; # Kill if RAM < 5%
+    freeSwapThreshold = 5; # AND Swap < 5%
+  };
+
   nix.optimise = {
     automatic = true;
     dates = [ "weekly" ];
