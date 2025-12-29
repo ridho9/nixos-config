@@ -23,6 +23,8 @@
           "keyboard-state"
           "pulseaudio"
           "network"
+          "cpu"
+          "memory"
           "backlight"
           "temperature"
           "battery"
@@ -61,6 +63,18 @@
           hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
           input-filename = "temp1_input";
           format = "{temperatureC}°C";
+        };
+
+        cpu = {
+          interval = 2;
+          format = "{usage:>2}% ";
+          tooltip = true;
+        };
+
+        memory = {
+          interval = 2;
+          format = "{percentage:>2}%   {swapPercentage:>2}% 󰾴";
+          tooltip-format = "RAM: {used:0.1f}GiB / {total:0.1f}GiB\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB";
         };
 
         "custom/calendar" = {
