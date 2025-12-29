@@ -17,7 +17,7 @@
           "hyprland/submap"
         ];
         modules-center = [
-          "clock"
+          "custom/calendar"
         ];
         modules-right = [
           "keyboard-state"
@@ -63,16 +63,14 @@
           format = "{temperatureC}°C";
         };
 
-        clock = {
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          # format-alt = "{:%Y-%m-%d}";
-          format = "{:%H:%M %Y-%m-%d}";
-
-          calendar = {
-            format = {
-              today = "<span color='#ff6699'><b><u>{}</u></b></span>";
-            };
-          };
+        "custom/calendar" = {
+          exec = "${pkgs.writeShellScript "waybar-calendar" ''
+            text=$(date +'%H:%M %Y-%m-%d')
+            tooltip=$(${pkgs.util-linux}/bin/cal -m -n 6 --color=always | sed -r "s/\x1b\[7m/<span color='#ff6699'><b>/g" | sed -r "s/\x1b\[27m/<\/b><\/span>/g" | sed -r "s/\x1b\[0m/<\/b><\/span>/g" | sed 's/$/\\n/' | tr -d '\n' | sed 's/"/\\"/g')
+            echo "{\"text\":\"$text\", \"tooltip\":\"$tooltip\"}"
+          ''}";
+          interval = 60;
+          return-type = "json";
         };
 
         pulseaudio = {
