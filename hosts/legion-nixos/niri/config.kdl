@@ -331,8 +331,9 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
 }
 
+// Maximize Ghostty by default
 window-rule {
-    match app-id="Alacritty"
+    match app-id="com.mitchellh.ghostty"
     open-maximized true
 }
 
@@ -371,7 +372,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 

@@ -20,6 +20,7 @@
     stylix.targets.fish.enable = false;
     stylix.targets.waybar.enable = false;
     stylix.targets.alacritty.enable = false;
+    stylix.targets.ghostty.enable = false;
     stylix.targets.rofi.enable = true;
 
     catppuccin = {

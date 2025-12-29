@@ -177,6 +177,13 @@
     settings = {
       font-family = "FiraCode Nerd Font";
       font-size = 12;
+      window-decoration = false;
+      term = "xterm-256color";
+      theme = "Catppuccin Mocha";
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
+      window-inherit-working-directory = false;
     };
   };
 

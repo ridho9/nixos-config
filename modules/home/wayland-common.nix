@@ -32,7 +32,7 @@
       main = {
         width = 60;
         lines = 20;
-        terminal = "${pkgs.alacritty}/bin/alacritty";
+        terminal = "${lib.getExe config.programs.ghostty.package}";
         fields = "filename,name,generic,keywords";
       };
     };

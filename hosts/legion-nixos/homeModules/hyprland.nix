@@ -28,7 +28,7 @@
       # "hyprctl setcursor BreezeX-Black 32"
       # "blueman-applet && blueman-tray"
       "[workspace 1 silent] firefox-devedition"
-      "[workspace 2 silent] alacritty"
+      "[workspace 2 silent] ghostty"
       "[workspace 10 silent] discord --start-minimized"
       "systemctl --user start hyprpolkitagent"
     ];
@@ -60,7 +60,7 @@
     bind = [
       "$mod SHIFT, Q, killactive"
       "$mod, F, exec, firefox-devedition"
-      "$mod, T, exec, alacritty"
+      "$mod, T, exec, ghostty"
       # "$mod, Space, exec, rofi -show drun -show-icons"
       "$mod, Space, exec, fuzzel"
       ", Print, exec, grimblast --notify --freeze copysave area"
