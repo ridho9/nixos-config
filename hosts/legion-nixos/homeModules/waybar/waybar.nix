@@ -23,10 +23,8 @@
           "keyboard-state"
           "pulseaudio"
           "network"
-          "cpu"
-          "memory"
+          "group/hardware"
           "backlight"
-          "temperature"
           "battery"
           "tray"
         ];
@@ -65,6 +63,15 @@
           format = "{temperatureC}°C";
         };
 
+        "group/hardware" = {
+          orientation = "inherit";
+          modules = [
+              "cpu"
+              "memory"
+              "temperature"
+          ];
+        };
+
         cpu = {
           interval = 2;
           format = "{usage:>2}% ";
@@ -73,7 +80,7 @@
 
         memory = {
           interval = 2;
-          format = "{percentage:>2}%   {swapPercentage:>2}% 󰾴";
+          format = "{percentage:>2}% ";
           tooltip-format = "RAM: {used:0.1f}GiB / {total:0.1f}GiB\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB";
         };
 
@@ -101,6 +108,14 @@
             phone = "";
             portable = "";
             car = "";
+            "analog-output" = "";
+            "Analog Output" = "";
+            "Type-C HiFi Audio Adapter" = "";
+            "Type-C HiFi Audio Adapter Analog Stereo" = "";
+            "alsa_output.usb-TTGK_Company_Type-C_HiFi_Audio_Adapter_5000000001-01.analog-stereo" = "";
+            "analog-output-lineout" = "";
+            "analog-output-headphones" = "";
+            "lineout" = "";
             default = [
               ""
               ""
@@ -156,7 +171,7 @@
         keyboard-state = {
           numlock = true;
           capslock = true;
-          format = "{name} {icon}";
+          format = "{icon}";
           format-icons = {
             locked = "";
             unlocked = "";

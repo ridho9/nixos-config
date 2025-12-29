@@ -244,6 +244,28 @@ label:focus {
     background-color: #eb4d4b;
 }
 
+#group-hardware,
+#hardware,
+#group\/hardware {
+    background-color: #64727D;
+    padding: 0 5px;
+    margin: 0 4px;
+}
+
+#group-hardware #cpu,
+#hardware #cpu,
+#group\/hardware #cpu,
+#group-hardware #memory,
+#hardware #memory,
+#group\/hardware #memory,
+#group-hardware #temperature,
+#hardware #temperature,
+#group\/hardware #temperature {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px;
+}
+
 #tray {
     background-color: #2980b9;
 }
@@ -292,19 +314,36 @@ label:focus {
 }
 
 #keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
+    background: transparent;
+    padding: 0 10px;
 }
 
 #keyboard-state>label {
     padding: 0 5px;
+    /* font-size: 13px; */
+    /* Inherit global size */
+}
+
+#keyboard-state>label.unlocked {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    opacity: 0;
 }
 
 #keyboard-state>label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#keyboard-state>label.capslock.locked {
+    color: #f53c3c;
+}
+
+#keyboard-state>label.numlock.locked {
+    color: #2ecc71;
 }
 
 #scratchpad {
