@@ -13,8 +13,6 @@
       {
         modules-left = [
           "niri/workspaces"
-          "hyprland/workspaces"
-          "hyprland/submap"
         ];
         modules-center = [
           "custom/calendar"

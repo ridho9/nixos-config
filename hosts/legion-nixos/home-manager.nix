@@ -109,7 +109,7 @@
 
     awscli2
     terraform
-    cdktf-cli
+    # cdktf-cli
   ];
 
   services.gnome-keyring = {
