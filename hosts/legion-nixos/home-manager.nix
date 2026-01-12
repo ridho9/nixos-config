@@ -41,7 +41,11 @@
 
   home.packages = with pkgs; [
     vscode-fhs
-    firefox-devedition
+    (firefox-devedition.overrideAttrs (old: {
+      desktopItem = old.desktopItem.override (d: {
+        mimeTypes = d.mimeTypes ++ [ "application/pdf" ];
+      });
+    }))
     brave
     discord
 
@@ -64,7 +68,6 @@
     qbittorrent-enhanced
 
     scrcpy
-    kdePackages.okular
 
     beekeeper-studio
 
@@ -123,6 +126,27 @@
 
   xdg.autostart.enable = true;
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [ "firefox-devedition.desktop" ];
+      "text/html" = [ "firefox-devedition.desktop" ];
+      "x-scheme-handler/http" = [ "firefox-devedition.desktop" ];
+      "x-scheme-handler/https" = [ "firefox-devedition.desktop" ];
+      "image/png" = [ "swayimg.desktop" ];
+      "image/jpeg" = [ "swayimg.desktop" ];
+      "image/gif" = [ "swayimg.desktop" ];
+      "image/webp" = [ "swayimg.desktop" ];
+    };
+
+    associations.added = {
+      "application/pdf" = [ "firefox-devedition.desktop" ];
+      "text/html" = [ "firefox-devedition.desktop" ];
+      "x-scheme-handler/http" = [ "firefox-devedition.desktop" ];
+      "x-scheme-handler/https" = [ "firefox-devedition.desktop" ];
+    };
+  };
+
   programs.git = {
     enable = true;
     settings.user.name = "ridho9";
@@ -143,7 +167,7 @@
       "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
       "org.freedesktop.impl.portal.Secret" = [ "gnome" ];
     };
-    xdgOpenUsePortal = true;
+    xdgOpenUsePortal = false;
   };
 
   programs.alacritty = {

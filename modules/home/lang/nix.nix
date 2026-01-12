@@ -2,7 +2,7 @@
 {
   config = {
     home.packages = [
-      pkgs.nixfmt-rfc-style
+      pkgs.nixfmt
       pkgs.nil
       pkgs.nixd
     ];

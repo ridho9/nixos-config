@@ -38,7 +38,7 @@
 
   # Kernel & Power Optimizations
   boot.kernelParams = [ "amd_pstate=active" ];
-  
+
   boot.kernel.sysctl = {
     "vm.vfs_cache_pressure" = 50;
     "vm.swappiness" = 10;
@@ -296,7 +296,7 @@
 
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-archive-plugin
       thunar-volman
     ];
@@ -316,7 +316,7 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.3.4" ];
+  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.5.3" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
