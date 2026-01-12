@@ -55,8 +55,6 @@
   };
 
   # OOM Prevention
-  # OOM Prevention
-  # OOM Prevention
   services.earlyoom = {
     enable = true;
     enableNotifications = false;
@@ -123,7 +121,6 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
   };
   users.users.rid9 = {
     isNormalUser = true;
@@ -161,9 +158,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    neovim
     wget
-    git
     git-lfs
     tig
     jujutsu

@@ -98,7 +98,6 @@
     seahorse
 
     spotify
-    spotify
     yt-dlp
 
     ncdu
