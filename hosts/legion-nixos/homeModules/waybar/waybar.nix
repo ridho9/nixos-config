@@ -18,12 +18,12 @@
           "custom/calendar"
         ];
         modules-right = [
-          "keyboard-state"
-          "pulseaudio"
-          "network"
           "group/hardware"
+          "network"
+          "pulseaudio"
           "backlight"
           "battery"
+          "keyboard-state"
           "tray"
         ];
 
@@ -59,6 +59,8 @@
           hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
           input-filename = "temp1_input";
           format = "{temperatureC}°C";
+          on-scroll-up = "true";
+          on-scroll-down = "true";
         };
 
         "group/hardware" = {
@@ -66,20 +68,36 @@
           modules = [
               "cpu"
               "memory"
+              "disk"
               "temperature"
           ];
+          on-click = "ghostty -e btop";
+          on-scroll-up = "true";
+          on-scroll-down = "true";
         };
 
         cpu = {
           interval = 2;
           format = "{usage:>2}% ";
           tooltip = true;
+          on-scroll-up = "true";
+          on-scroll-down = "true";
         };
 
         memory = {
           interval = 2;
           format = "{percentage:>2}% ";
           tooltip-format = "RAM: {used:0.1f}GiB / {total:0.1f}GiB\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB";
+          on-scroll-up = "true";
+          on-scroll-down = "true";
+        };
+
+        disk = {
+          interval = 30;
+          format = "{percentage_used}% ";
+          path = "/";
+          on-scroll-up = "true";
+          on-scroll-down = "true";
         };
 
         "custom/calendar" = {
@@ -164,6 +182,10 @@
             ""
             ""
           ];
+        };
+
+        tray = {
+          spacing = 10;
         };
 
         keyboard-state = {

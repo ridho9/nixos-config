@@ -112,6 +112,8 @@
     awscli2
     terraform
     # cdktf-cli
+    cloudflared
+    ngrok
   ];
 
   services.gnome-keyring = {
