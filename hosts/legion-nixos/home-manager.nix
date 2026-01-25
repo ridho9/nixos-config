@@ -34,7 +34,7 @@
   ];
 
   home.sessionVariables = {
-    UV_PYTHON = "/etc/profiles/per-user/rid9/bin/python3";
+    UV_PYTHON_PREFERENCE = "system";
   };
 
   programs.home-manager.enable = true;

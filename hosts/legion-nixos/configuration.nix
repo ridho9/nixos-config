@@ -37,7 +37,12 @@
   };
 
   # Kernel & Power Optimizations
-  boot.kernelParams = [ "amd_pstate=active" ];
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "amdgpu.gpu_recovery=1"
+    "amdgpu.ppfeaturemask=0xffffffff"
+    "mem_sleep_default=deep"
+  ];
 
   boot.kernel.sysctl = {
     "vm.vfs_cache_pressure" = 50;
@@ -322,4 +327,19 @@
   };
 
   programs.fuse.userAllowOther = true;
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      openssl
+      zlib
+      glib
+      sqlite
+      libffi
+      ncurses
+      readline
+      libgcc
+    ];
+  };
 }
