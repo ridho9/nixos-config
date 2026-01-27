@@ -19,6 +19,7 @@
     ../../modules/home/lang/go.nix
     ../../modules/home/lang/js.nix
     ../../modules/home/lang/ocaml.nix
+    ../../modules/home/lang/rust.nix
 
     ./homeModules/waybar/waybar.nix
   ]
