@@ -5,7 +5,7 @@
       (pkgs.python313.withPackages (
         ppkgs: with ppkgs; [
           requests
-          reportlab
+          # reportlab
         ]
       ))
       pkgs.poetry

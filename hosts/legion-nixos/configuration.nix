@@ -277,6 +277,11 @@
     };
   };
 
+  systemd.sleep.extraConfig = ''
+    SuspendState=mem
+    HibernateMode=platform shutdown
+  '';
+
   security.pam.services.swaylock = { };
 
   services.gnome.gnome-keyring.enable = true;
