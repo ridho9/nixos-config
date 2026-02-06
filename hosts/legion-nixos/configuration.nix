@@ -41,7 +41,7 @@
     "amd_pstate=active"
     "amdgpu.gpu_recovery=1"
     "amdgpu.ppfeaturemask=0xffffffff"
-    "mem_sleep_default=deep"
+    # "mem_sleep_default=deep" # WARNING: Enable only if s2idle (modern standby) causes high drain. 'deep' (S3) can cause wake issues on modern Legions.
   ];
 
   boot.kernel.sysctl = {
@@ -264,6 +264,7 @@
     };
   };
   services.thermald.enable = true;
+  services.thermald.ignoreCpuidCheck = true;
 
   services.blueman.enable = true;
 

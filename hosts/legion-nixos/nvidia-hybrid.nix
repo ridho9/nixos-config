@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # ---------------------------------------------------------------------
@@ -13,7 +18,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
-    
+
     # Power Management (Crucial for turning off dGPU)
     powerManagement.enable = true;
     powerManagement.finegrained = true;
@@ -32,7 +37,10 @@
 
   # 2. Kernel Parameters & Modules
   # Force driver to respect power management
-  boot.kernelParams = [ "nvidia.NVreg_DynamicPowerManagement=0x02" ];
+  boot.kernelParams = [
+    "nvidia.NVreg_DynamicPowerManagement=0x02"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+  ];
   # Enable audio power saving (fix for Audio controller keeping GPU awake)
   boot.extraModprobeConfig = "options snd_hda_intel power_save=1";
 
@@ -50,7 +58,10 @@
   # Ensures 'auto' power control is enforced at boot, even if TLP or driver reverts it.
   systemd.services.force-nvidia-auto = {
     description = "Force Nvidia GPU to Auto Power Control";
-    after = [ "multi-user.target" "tlp.service" ];
+    after = [
+      "multi-user.target"
+      "tlp.service"
+    ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";

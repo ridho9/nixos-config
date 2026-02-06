@@ -27,7 +27,6 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-amd"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "i2c-dev"
   ];
   boot.extraModulePackages = [ ];
