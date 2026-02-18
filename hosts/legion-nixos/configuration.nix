@@ -42,6 +42,7 @@
     "amdgpu.gpu_recovery=1"
     "amdgpu.ppfeaturemask=0xffffffff"
     # "mem_sleep_default=deep" # WARNING: Enable only if s2idle (modern standby) causes high drain. 'deep' (S3) can cause wake issues on modern Legions.
+    "pcie_aspm=off" # Disable PCIe Active State Power Management to fix intermittent suspend failures
   ];
 
   boot.kernel.sysctl = {
@@ -261,6 +262,8 @@
       CPU_BOOST_ON_BAT = 0;
       START_CHARGE_THRESH_BAT0 = 75;
       STOP_CHARGE_THRESH_BAT0 = 80;
+      PLATFORM_PROFILE_ON_AC = "balanced";
+      PLATFORM_PROFILE_ON_BAT = "balanced";
     };
   };
   services.thermald.enable = true;
@@ -322,7 +325,7 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.5.3" ];
+  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.5.5" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
@@ -347,5 +350,34 @@
       readline
       libgcc
     ];
+  };
+
+  # Phase 1: Suspend/Resume Logging for debugging intermittent issues
+  # Enable persistent journal to capture errors across reboots
+  services.journald.extraConfig = ''
+    Storage=persistent
+    SystemMaxUse=500M
+  '';
+
+  # Log when system suspends
+  systemd.services.suspend-log = {
+    description = "Log suspend events";
+    before = [ "sleep.target" ];
+    wantedBy = [ "sleep.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'echo \"SUSPEND at $(date)\" >> /var/log/suspend.log'";
+    };
+  };
+
+  # Log when system resumes
+  systemd.services.resume-log = {
+    description = "Log resume events";
+    after = [ "suspend.target" ];
+    wantedBy = [ "suspend.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'echo \"RESUME at $(date)\" >> /var/log/suspend.log; dmesg | tail -20 >> /var/log/suspend.log'";
+    };
   };
 }
