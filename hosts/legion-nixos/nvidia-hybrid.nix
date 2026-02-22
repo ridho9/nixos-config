@@ -21,7 +21,7 @@
 
     # Power Management (Crucial for turning off dGPU)
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
+    powerManagement.finegrained = false; # Disabled to fix suspend/resume hangs
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
 
@@ -38,7 +38,7 @@
   # 2. Kernel Parameters & Modules
   # Force driver to respect power management
   boot.kernelParams = [
-    "nvidia.NVreg_DynamicPowerManagement=0x02"
+    "nvidia.NVreg_DynamicPowerManagement=0x01" # Changed from 0x02 (fine-grained) to 0x01 (coarse) for stability
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
   # Enable audio power saving (fix for Audio controller keeping GPU awake)

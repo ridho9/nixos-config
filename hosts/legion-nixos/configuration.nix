@@ -380,4 +380,9 @@
       ExecStart = "${pkgs.bash}/bin/bash -c 'echo \"RESUME at $(date)\" >> /var/log/suspend.log; dmesg | tail -20 >> /var/log/suspend.log'";
     };
   };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 }

@@ -49,6 +49,7 @@
     }))
     brave
     discord
+    discord-ptb
 
     fastfetch
     gh
