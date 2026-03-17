@@ -217,6 +217,8 @@
     jq
 
     file-roller
+    vulkan-tools
+    lsof
   ];
 
   programs.nh.enable = true;
@@ -325,7 +327,7 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.5.5" ];
+  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.5.7" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
@@ -349,6 +351,12 @@
       ncurses
       readline
       libgcc
+      vulkan-loader
+      mesa
+      alsa-lib
+      wayland
+      wayland-protocols
+      libxkbcommon
     ];
   };
 

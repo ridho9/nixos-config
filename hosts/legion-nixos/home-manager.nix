@@ -90,7 +90,7 @@
     protonplus
     code-cursor-fhs
 
-    zed-editor-fhs
+    # zed-editor-fhs
 
     dbus
     temporal-cli

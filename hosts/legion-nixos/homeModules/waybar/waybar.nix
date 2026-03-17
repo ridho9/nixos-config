@@ -66,10 +66,10 @@
         "group/hardware" = {
           orientation = "inherit";
           modules = [
-              "cpu"
-              "memory"
-              "disk"
-              "temperature"
+            "cpu"
+            "memory"
+            "disk"
+            "temperature"
           ];
           on-click = "ghostty -e btop";
           on-scroll-up = "true";
@@ -166,6 +166,7 @@
         };
 
         battery = {
+          bat = "BAT0";
           states = {
             warning = 30;
             critical = 15;

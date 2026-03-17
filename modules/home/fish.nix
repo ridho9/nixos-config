@@ -14,11 +14,17 @@ in
       pkgs.bat
     ];
 
+    home.sessionVariables = {
+      XKB_CONFIG_ROOT = "${pkgs.xkeyboard_config}/share/X11/xkb";
+    };
+
     programs.fish = {
       enable = true;
       interactiveShellInit = ''
         set fish_greeting # Disable greeting
+        set -gx OPENCODE_EXPERIMENTAL_LSP_TOOL true
         fish_add_path "/home/rid9/.bun/bin"
+        fish_add_path /home/rid9/.opencode/bin
       '';
       shellAbbrs = {
         gst = "git status";
@@ -29,7 +35,7 @@ in
       shellAliases = {
         cd = "z";
         ls = "eza";
-        zed = "zeditor";
+        # zed = "zeditor";
       };
       functions = {
         cursor = ''
