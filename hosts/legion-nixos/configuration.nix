@@ -283,10 +283,15 @@
     };
   };
 
-  systemd.sleep.extraConfig = ''
-    SuspendState=mem
-    HibernateMode=platform shutdown
-  '';
+  # systemd.sleep.settings.Sleep = ''
+  #   SuspendState=mem
+  #   HibernateMode=platform shutdown
+  # '';
+
+  systemd.sleep.settings.Sleep = {
+    SuspendState = "mem";
+    HibernateMode = "platform shutdown";
+  };
 
   security.pam.services.swaylock = { };
 
