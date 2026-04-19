@@ -116,6 +116,9 @@
     # cdktf-cli
     cloudflared
     ngrok
+    azure-cli
+
+    google-chrome
   ];
 
   services.gnome-keyring = {
@@ -256,5 +259,22 @@
     package = pkgs.obs-studio.override {
       cudaSupport = true;
     };
+  };
+
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set -g @plugin 'tmux-plugins/tpm'
+      set -g @plugin 'tmux-plugins/tmux-sensible'
+
+      set -g @plugin 'Ataraxy-Labs/opensessions'
+
+      run '~/.tmux/plugins/tpm/tpm'
+    '';
+  };
+
+  programs.zellij = {
+    enable = true;
+    enableFishIntegration = true;
   };
 }
