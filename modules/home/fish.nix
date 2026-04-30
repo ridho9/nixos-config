@@ -61,6 +61,23 @@ in
             command cursor $argv
           end
         '';
+
+        devsafe = ''
+          set -l memory_high 6G
+          set -l memory_max 8G
+
+          if test (count $argv) -eq 0
+            echo "usage: devsafe <command> [args...]"
+            echo "example: devsafe pnpm dev"
+            return 1
+          end
+
+          echo "Running in a protected user scope (MemoryHigh=$memory_high, MemoryMax=$memory_max)"
+          systemd-run --user --scope --same-dir --collect \
+            -p MemoryHigh=$memory_high \
+            -p MemoryMax=$memory_max \
+            $argv
+        '';
       };
     };
 

@@ -64,8 +64,26 @@
   services.earlyoom = {
     enable = true;
     enableNotifications = false;
-    freeMemThreshold = 5;
-    freeSwapThreshold = 5;
+    freeMemThreshold = 12;
+    freeMemKillThreshold = 6;
+    freeSwapThreshold = 10;
+    freeSwapKillThreshold = 5;
+    reportInterval = 60;
+    extraArgs = [
+      "--avoid"
+      "(^|/)(tmux|zellij|bash|fish|zsh|nu|ghostty|alacritty)$"
+      "--prefer"
+      "(^|/)(node|code|slack|chrome|firefox|WebExtensions)$"
+    ];
+  };
+
+  systemd.oomd = {
+    enable = true;
+    enableUserSlices = true;
+    settings.OOM = {
+      DefaultMemoryPressureLimit = "70%";
+      DefaultMemoryPressureDurationSec = "20s";
+    };
   };
 
   nix.optimise = {

@@ -7,7 +7,7 @@
       deno
       pnpm
 
-      nodePackages."@nestjs/cli"
+      nest-cli
       # turbo
     ];
 

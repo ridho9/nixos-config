@@ -221,24 +221,31 @@
     enable = true;
   };
 
-  systemd.user.services.earlyoom-watcher = {
+  systemd.user.services.oom-killer-watcher = {
     Unit = {
-      Description = "EarlyOOM Log Watcher Notification";
+      Description = "OOM Killer Log Watcher Notification";
       After = [ "graphical-session.target" ];
       PartOf = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = pkgs.writeShellScript "watch-earlyoom" ''
-        # Monitor journal for EarlyOOM kill events
-        # grep --line-buffered ensures immediate pipe output
-        ${pkgs.systemd}/bin/journalctl -u earlyoom -f -n 0 -o cat | \
-        ${pkgs.ripgrep}/bin/rg --line-buffered "sending SIGTERM" | \
+      ExecStart = pkgs.writeShellScript "watch-oom-events" ''
+        # Monitor journal for OOM kill events from both earlyoom and systemd-oomd.
+        ${pkgs.systemd}/bin/journalctl -u earlyoom -u systemd-oomd -f -n 0 -o cat | \
+        ${pkgs.ripgrep}/bin/rg --line-buffered "sending SIGTERM|sending SIGKILL|Killed /|systemd-oomd killed one or more processes" | \
         while read -r line; do
+          title="OOM Killer"
+
+          if echo "$line" | ${pkgs.ripgrep}/bin/rg -q "sending SIGTERM|sending SIGKILL"; then
+            title="EarlyOOM Killer"
+          elif echo "$line" | ${pkgs.ripgrep}/bin/rg -q "Killed /|systemd-oomd killed one or more processes"; then
+            title="systemd-oomd"
+          fi
+
           ${pkgs.libnotify}/bin/notify-send \
             -u critical \
-            -t 5000 \
+            -t 30000 \
             -i dialog-error \
-            "EarlyOOM Killer" \
+            "$title" \
             "$line"
         done
       '';
@@ -275,6 +282,6 @@
 
   programs.zellij = {
     enable = true;
-    enableFishIntegration = true;
+    enableFishIntegration = false;
   };
 }

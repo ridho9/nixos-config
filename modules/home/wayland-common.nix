@@ -23,7 +23,13 @@
 
   services.mako = {
     enable = true;
-    settings.default-timeout = 2000;
+    settings = {
+      default-timeout = 10000;
+      ignore-timeout = true;
+      "urgency=critical" = {
+        default-timeout = 30000;
+      };
+    };
   };
 
   programs.fuzzel = {
