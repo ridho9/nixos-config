@@ -99,6 +99,10 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Explicitly keep the initrd on systemd so EFI hibernation can resume via
+  # systemd's HibernateLocation EFI variable.
+  boot.initrd.systemd.enable = true;
+
   networking.hostName = "legion-nixos";
 
   hardware.bluetooth.enable = true;
@@ -227,6 +231,22 @@
     zig
     zls
 
+    # Common shell/network utilities
+    time
+    dnsutils
+    fd
+    fzf
+    whois
+    mtr
+    traceroute
+    tcpdump
+    iperf3
+    socat
+    entr
+    xxd
+    duf
+    p7zip
+
     tree
     file
 
@@ -311,6 +331,15 @@
     HibernateMode = "platform shutdown";
   };
 
+  services.upower = {
+    enable = true;
+    usePercentageForPolicy = true;
+    percentageLow = 15;
+    percentageCritical = 10;
+    percentageAction = 7;
+    criticalPowerAction = "Hibernate";
+  };
+
   security.pam.services.swaylock = { };
 
   services.gnome.gnome-keyring.enable = true;
@@ -350,14 +379,24 @@
 
   hardware.xpadneo.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.5.7" ];
+  # Discord PTB currently depends on OpenSSL 1.1 in nixpkgs' Linux package.
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
+
+  swapDevices = [
+    {
+      device = "/var/lib/hibernate/swapfile";
+      size = 36 * 1024; # 36 GiB swap file for hibernation on the 32 GiB machine.
+      priority = 0; # Keep zram preferred for normal swapping.
+    }
+  ];
 
   zramSwap = {
     enable = true;
     algorithm = "zstd";
     memoryPercent = 50;
+    priority = 5;
   };
 
   programs.fuse.userAllowOther = true;

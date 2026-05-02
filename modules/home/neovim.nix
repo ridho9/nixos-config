@@ -5,6 +5,10 @@
     defaultEditor = false;
     viAlias = true;
     vimAlias = true;
+    # Keep the legacy Home Manager defaults explicit to avoid state-version
+    # warnings without changing provider behavior.
+    withPython3 = true;
+    withRuby = true;
 
     extraLuaConfig = ''
       -- VSCode Neovim integration

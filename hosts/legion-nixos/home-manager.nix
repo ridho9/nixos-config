@@ -84,7 +84,7 @@
     adwaita-icon-theme
 
     winetricks
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
     xarchiver
 
     protonplus
@@ -196,6 +196,9 @@
       gtk-application-prefer-dark-theme = 1;
     };
 
+    # Keep the pre-26.05 Home Manager behavior explicitly so upgrades stay quiet
+    # without changing the chosen theme.
+    gtk4.theme = config.gtk.theme;
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
