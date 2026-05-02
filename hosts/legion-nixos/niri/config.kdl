@@ -3,12 +3,9 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
-debug {
-    // Force Niri to use the AMD iGPU (card1) to allow Nvidia dGPU to sleep
-    render-drm-device "/dev/dri/by-path/pci-0000:06:00.0-card"
-    // Explicitly ignore Nvidia GPU to prevent Niri from keeping it awake
-    ignore-drm-device "/dev/dri/by-path/pci-0000:01:00.0-card"
-}
+// This Legion routes the internal panel through the AMD iGPU and the external
+// HDMI/DP ports through the Nvidia dGPU. Let niri see both GPUs so the laptop
+// panel and external monitor can be used together.
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -66,8 +63,9 @@ input {
     // warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    // With max-scroll-amount="0%", this won't refocus something that would require
+    // niri to scroll the workspace view just because the pointer brushed an edge.
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -75,36 +73,20 @@ input {
 // The built-in laptop monitor is usually called "eDP-1".
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-// Remember to uncomment the node by removing "/-"!
-/-output "eDP-1" {
-    // Uncomment this line to disable this output.
-    // off
+// Primary desk layout: laptop on the left, external monitor on the right.
+// When HDMI-A-1 is unplugged, niri will move its workspaces to the remaining
+// output and bring them back when the monitor reconnects.
+output "eDP-1" {
+    scale 1
+    position x=0 y=0
+}
 
-    // Resolution and, optionally, refresh rate of the output.
-    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-    // If the refresh rate is omitted, niri will pick the highest refresh rate
-    // for the resolution.
-    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
-
-    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 2
-
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
-
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
-    position x=1280 y=0
+output "HDMI-A-1" {
+    mode "2560x1440"
+    scale 1
+    position x=1920 y=0
+    focus-at-startup
+    variable-refresh-rate
 }
 
 // Settings that influence how windows are positioned and sized.
