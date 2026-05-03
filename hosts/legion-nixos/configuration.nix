@@ -386,7 +386,7 @@
 
   swapDevices = [
     {
-      device = "/var/lib/hibernate/swapfile";
+      device = "/var/swapfile";
       size = 36 * 1024; # 36 GiB swap file for hibernation on the 32 GiB machine.
       priority = 0; # Keep zram preferred for normal swapping.
     }
