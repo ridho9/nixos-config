@@ -16,6 +16,7 @@
 
     ../../modules/nixos/options.nix
     ../../modules/nixos/stylix.nix
+    ./hermes.nix
     ./niri.nix
     ./nvidia-hybrid.nix
   ];

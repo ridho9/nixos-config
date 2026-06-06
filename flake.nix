@@ -23,6 +23,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     stylix.url = "github:danth/stylix";
     catppuccin.url = "github:catppuccin/nix";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
@@ -44,6 +45,7 @@
           inputs.nixos-hardware.nixosModules.lenovo-legion-15ach6h
           inputs.stylix.nixosModules.stylix
           inputs.catppuccin.nixosModules.catppuccin
+          inputs.hermes-agent.nixosModules.default
           ./hosts/legion-nixos/configuration.nix
         ];
       };
