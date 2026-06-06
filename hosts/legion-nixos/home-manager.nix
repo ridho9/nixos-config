@@ -31,7 +31,6 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
-    "$HOME/.pnpm"
   ];
 
   home.sessionVariables = {
@@ -119,16 +118,8 @@
     azure-cli
 
     google-chrome
+    doppler
   ];
-
-  services.gnome-keyring = {
-    enable = true;
-    components = [
-      "pkcs11"
-      "secrets"
-      "ssh"
-    ];
-  };
 
   xdg.autostart.enable = true;
 

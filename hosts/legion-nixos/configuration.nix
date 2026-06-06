@@ -239,6 +239,7 @@
     whois
     mtr
     traceroute
+    mosh
     tcpdump
     iperf3
     socat
@@ -275,8 +276,13 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
+      22
       80
       443
+    ];
+    allowedUDPPortRanges = [
+      # Mosh selects a UDP port from this range after authenticating over SSH.
+      { from = 60000; to = 61000; }
     ];
   };
 
@@ -318,6 +324,7 @@
       HandlePowerKey = "suspend";
       HandleLidSwitch = "suspend";
       HandleLidSwitchExternalPower = "suspend";
+      HandleLidSwitchDocked = "ignore";
     };
   };
 
@@ -456,6 +463,14 @@
     binfmt = true;
   };
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
+
   services.tailscale = {
     enable = true;
     # Enable tailscale at startup
@@ -463,5 +478,15 @@
     # If you would like to use a preauthorized key
     #authKeyFile = "/run/secrets/tailscale_key";
 
+  };
+
+  services.syncthing = {
+    enable = true;
+    user = "rid9";
+    group = "users";
+    dataDir = "/home/rid9";
+    configDir = "/home/rid9/.config/syncthing";
+    guiAddress = "127.0.0.1:8384";
+    openDefaultPorts = true;
   };
 }
