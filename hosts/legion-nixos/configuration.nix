@@ -17,6 +17,7 @@
     ../../modules/nixos/options.nix
     ../../modules/nixos/stylix.nix
     ./hermes.nix
+    ./litellm.nix
     ./niri.nix
     ./nvidia-hybrid.nix
   ];
@@ -283,7 +284,10 @@
     ];
     allowedUDPPortRanges = [
       # Mosh selects a UDP port from this range after authenticating over SSH.
-      { from = 60000; to = 61000; }
+      {
+        from = 60000;
+        to = 61000;
+      }
     ];
   };
 
