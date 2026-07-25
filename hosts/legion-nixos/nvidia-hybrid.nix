@@ -40,9 +40,34 @@
   boot.kernelParams = [
     "nvidia.NVreg_DynamicPowerManagement=0x01" # Changed from 0x02 (fine-grained) to 0x01 (coarse) for stability
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+
+    # Disable the GSP (GPU System Processor) firmware path.
+    #
+    # 2026-07-25: resume from hibernate (S4) hard-failed with the GSP faulting
+    # inside its own firmware, which left the GPU unusable until reboot:
+    #   Xid 120: GSP task exception: instruction access page fault @ pc:0x6a3b005e
+    #   Xid 154: GPU recovery action changed from 0x0 (None) to 0x1 (GPU Reset Required)
+    # The driver then WARNed in nv_restore_user_channels (nv.c:4451) and oopsed
+    # with a NULL deref in nvkms_resume, killing nvidia-sleep.sh with IRQs
+    # disabled. That in turn produced -110 timeouts across rtw89, Bluetooth and
+    # snd_hda_intel, since interrupts were off for the rest of the resume.
+    #
+    # Falling back to the CPU-side RM avoids the GSP resume path entirely.
+    # Verified present in 595.45.04 via `modinfo -p nvidia | grep EnableGpuFirmware`.
+    # Set here rather than in extraModprobeConfig: an unrecognised kernel-cmdline
+    # module param is ignored, whereas an unknown `options nvidia ...` line makes
+    # modprobe fail outright and would leave the machine without a GPU driver.
+    "nvidia.NVreg_EnableGpuFirmware=0"
   ];
-  # Enable audio power saving (fix for Audio controller keeping GPU awake)
-  boot.extraModprobeConfig = "options snd_hda_intel power_save=1";
+
+  # Where the driver spills VRAM contents when preserving allocations across
+  # suspend/hibernate. Unset, this defaults to /tmp -- which works today only
+  # because /tmp lives on the root ext4. Pin it to /var/tmp so that enabling
+  # boot.tmp.useTmpfs later cannot silently break hibernation.
+  boot.extraModprobeConfig = ''
+    options snd_hda_intel power_save=1
+    options nvidia NVreg_TemporaryFilePath=/var/tmp
+  '';
 
   # 3. Udev Rules (The "Big Hammer")
   # Force both Video (030000) and Audio (228e) to 'auto' suspend.
