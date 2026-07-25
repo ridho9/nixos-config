@@ -32,7 +32,7 @@
     };
 
     workingDirectory = "/data/workspace";
-    extraDependencyGroups = [ "messaging" ];
+    extraDependencyGroups = [ "messaging" "fal" ];
     extraPackages = with pkgs; [
       curl
       fd
@@ -53,7 +53,7 @@
         api_mode = "chat_completions";
         base_url = "http://127.0.0.1:4000/v1";
         api_key = "\${LITELLM_API_KEY}";
-        default = "opencode-go/deepseek-v4-flash";
+        default = "opencode-go/kimi-k2.7-code";
       };
 
       agent = {
