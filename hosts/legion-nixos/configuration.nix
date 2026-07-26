@@ -365,6 +365,21 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+
+    # Remote Play needs -pipewire to capture anything under Wayland. Without it
+    # the host still accepts the connection and still encodes on NVENC, but the
+    # capture method degrades to literally:
+    #   >>> Capture method set to Desktop Black Frame + NVENC H264
+    #   Unable to capture video: k_ECaptureFailedReasonPipewireRequired
+    # i.e. the client gets a perfectly healthy stream of black frames.
+    #
+    # The module has no extraArgs option, so override the wrapper instead --
+    # pkgs.steam threads extraArgs into its launcher as `exec steam ${extraArgs} "$@"`
+    # and strips it from the FHSEnv args, so this is the supported seam.
+    #
+    # The portal grant is persistent ("Finished obtaining persistent permissions"),
+    # so this does not re-prompt to share the screen on every launch.
+    package = pkgs.steam.override { extraArgs = "-pipewire"; };
   };
 
   services.flatpak.enable = true;
