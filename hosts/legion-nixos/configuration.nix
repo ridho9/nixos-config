@@ -19,6 +19,7 @@
     ./git-gc.nix
     ./hermes.nix
     ./litellm.nix
+    ./llama-cpp.nix
     ./niri.nix
     ./nvidia-hybrid.nix
   ];
