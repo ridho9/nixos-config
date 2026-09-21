@@ -48,6 +48,13 @@
     "pcie_aspm=off" # Disable PCIe Active State Power Management to fix intermittent suspend failures
   ];
 
+  # legion-laptop: out-of-tree module exposing fan RPM, per-fan curves, and
+  # power readings that the in-kernel lenovo_wmi_* drivers do not provide.
+  # Without it there are no fan*_input sensors at all, so you cannot tell
+  # whether the fans are responding to a thermal event.
+  boot.extraModulePackages = [ config.boot.kernelPackages.lenovo-legion-module ];
+  boot.kernelModules = [ "legion_laptop" ];
+
   boot.kernel.sysctl = {
     "vm.vfs_cache_pressure" = 50;
     "vm.swappiness" = 10;
@@ -301,14 +308,14 @@
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/keyring/ssh";
   };
 
-  # Power Management (TLP + Thermald)
+  # Power Management (TLP)
   services.power-profiles-daemon.enable = false; # Conflict with TLP
   services.tlp = {
     enable = true;
     settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
@@ -318,8 +325,6 @@
       PLATFORM_PROFILE_ON_BAT = "balanced";
     };
   };
-  services.thermald.enable = true;
-  services.thermald.ignoreCpuidCheck = true;
 
   services.blueman.enable = true;
 
