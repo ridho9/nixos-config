@@ -70,8 +70,6 @@
 
     scrcpy
 
-    beekeeper-studio
-
     prismlauncher
 
     supabase-cli
