@@ -20,6 +20,10 @@ in
     programs.bun.enable = true;
 
     home.sessionPath = [
+      # pnpm installs global shims into $PNPM_HOME/bin; older versions wrote
+      # them loose into $PNPM_HOME. Both stay on PATH, bin first, so current
+      # installs win over any stale shim left at the top level.
+      "${config.home.homeDirectory}/.pnpm/bin"
       "${config.home.homeDirectory}/.pnpm"
       "${npmGlobal}/bin"
     ];
