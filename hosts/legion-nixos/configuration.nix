@@ -45,7 +45,10 @@
     "amdgpu.gpu_recovery=1"
     "amdgpu.ppfeaturemask=0xffffffff"
     # "mem_sleep_default=deep" # WARNING: Enable only if s2idle (modern standby) causes high drain. 'deep' (S3) can cause wake issues on modern Legions.
-    "pcie_aspm=off" # Disable PCIe Active State Power Management to fix intermittent suspend failures
+    # PCIe ASPM left at firmware default (was pcie_aspm=off for intermittent
+    # suspend failures). Re-enabled now the machine runs headless as a server;
+    # ASPM lets PCIe links enter low-power states, cutting a few watts of
+    # chassis heat. If suspend starts failing again, restore "pcie_aspm=off".
   ];
 
   # legion-laptop: out-of-tree module exposing fan RPM, per-fan curves, and

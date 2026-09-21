@@ -21,7 +21,10 @@
 
     # Power Management (Crucial for turning off dGPU)
     powerManagement.enable = true;
-    powerManagement.finegrained = false; # Disabled to fix suspend/resume hangs
+    # Fine-grained RTM D3: fully powers the dGPU off when idle (~9.5W saved).
+    # Was disabled for suspend/resume hangs; re-enabled now the machine runs
+    # headless as a server. If resume hangs return, set back to false.
+    powerManagement.finegrained = true;
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
 
@@ -38,7 +41,7 @@
   # 2. Kernel Parameters & Modules
   # Force driver to respect power management
   boot.kernelParams = [
-    "nvidia.NVreg_DynamicPowerManagement=0x01" # Changed from 0x02 (fine-grained) to 0x01 (coarse) for stability
+    "nvidia.NVreg_DynamicPowerManagement=0x02" # 0x02 = fine-grained; pairs with powerManagement.finegrained
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
 
     # Disable the GSP (GPU System Processor) firmware path.
