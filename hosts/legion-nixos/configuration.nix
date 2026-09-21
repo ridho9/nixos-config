@@ -222,7 +222,11 @@
 
     swayimg
 
-    btop
+    # btop-cuda: same btop, built against NVML so the GPU box (key 5) works.
+    # Plain btop dlopens libnvidia-ml.so.1, which is not on the loader path
+    # on NixOS (nvidia libs live in /run/opengl-driver/lib), so it silently
+    # shows no GPU.
+    btop-cuda
     bruno
     sqlite
     sqlite-web
