@@ -16,6 +16,7 @@
 
     ../../modules/nixos/options.nix
     ../../modules/nixos/stylix.nix
+    ./git-gc.nix
     ./hermes.nix
     ./litellm.nix
     ./niri.nix
