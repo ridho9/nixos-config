@@ -465,10 +465,10 @@
 
   # Phase 1: Suspend/Resume Logging for debugging intermittent issues
   # Enable persistent journal to capture errors across reboots
-  services.journald.extraConfig = ''
-    Storage=persistent
-    SystemMaxUse=500M
-  '';
+  services.journald.settings.Journal = {
+    Storage = "persistent";
+    SystemMaxUse = "500M";
+  };
 
   # Log when system suspends
   systemd.services.suspend-log = {
