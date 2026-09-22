@@ -10,7 +10,7 @@
     withPython3 = true;
     withRuby = true;
 
-    extraLuaConfig = ''
+    initLua = ''
       -- VSCode Neovim integration
       if vim.g.vscode then
           -- VSCode extension configuration

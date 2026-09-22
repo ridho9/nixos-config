@@ -106,7 +106,7 @@
     pngquant
 
     google-cloud-sql-proxy
-    antigravity-fhs
+    antigravity-ide-fhs
 
     awscli2
     terraform
