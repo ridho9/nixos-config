@@ -68,6 +68,9 @@
     "net.core.default_qdisc" = "cake";
   };
 
+  # Store cleanup is handled by programs.nh.clean (--keep-since 14d --keep 5),
+  # which also collects home-manager generations. Keep this off: enabling both
+  # makes them fight over the same roots and nixpkgs warns about the conflict.
   nix.gc = {
     automatic = false;
     dates = "weekly";
@@ -110,6 +113,10 @@
     device = "nodev";
     useOSProber = true;
     efiSupport = true;
+    # Each generation ships its own kernel and initrd into the 256M ESP.
+    # Unbounded, that fills /boot and a switch fails partway through writing
+    # the bootloader. 10 is far more rollback depth than is ever used.
+    configurationLimit = 10;
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
